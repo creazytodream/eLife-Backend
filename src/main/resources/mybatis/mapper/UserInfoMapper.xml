@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->  
+<mapper namespace="com.mapper.UserInfoMapper">  
+
+    <!-- insert userInfo -->
+    <insert id = "insertUserInfo" parameterType="com.entity.UserInfo">
+        INSERT INTO userinfo (id, openid, username, phone, staffid, department, office, index, floor) 
+        VALUES (#{id}, #{openid}, #{username}, #{phone}, #{staffid}, #{department}, #{office}, #{index}, #{floor});
+    </insert>
+    
+    <!-- update userInfo -->
+    <update id="updateUserInfo" parameterType="com.entity.UserInfo">
+        UPDATE userinfo 
+        SET openid=#{openid}, username=#{username} , phone=#{phone} , staffid=#{staffid}, department=#{department}, office=#{office}, index=#{index}, floor=#{floor} 
+        WHERE id=#{id}
+    </update>
+    
+    <!-- find userInfo -->
+    <select id="findUserInfo" parameterType="java.lang.String" resultType="com.entity.UserInfo">
+        SELECT *
+        FROM userinfo 
+        WHERE openid=#{0}
+    </select>
+    
+    <!-- delete userInfo -->
+    <delete id="deleteUserInfo" parameterType="int">
+        DELETE FROM userinfo 
+        WHERE id=#{0}
+    </delete>
+</mapper>

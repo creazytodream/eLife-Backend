@@ -1,6 +1,6 @@
 package com.config;
 
-public class URLConstant {
+public class DingDingApiURLConstant {
     /**
      * 钉钉网关gettoken地址
      */

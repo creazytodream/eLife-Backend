@@ -1,6 +1,7 @@
 package com.controller;
 
-import com.config.URLConstant;
+import com.alibaba.fastjson.JSON;
+import com.config.DingDingApiURLConstant;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiUserGetRequest;
@@ -21,16 +22,8 @@ import java.util.Map;
  * 企业内部E应用Quick-Start示例代码 实现了最简单的免密登录（免登）功能
  */
 @RestController
-public class IndexController {
-    private static final Logger bizLogger = LoggerFactory.getLogger(IndexController.class);
-
-    /**
-     * 欢迎页面,通过url访问，判断后端服务是否启动
-     */
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String welcome() {
-        return "welcome";
-    }
+public class LoginController {
+    private static final Logger bizLogger = LoggerFactory.getLogger(LoginController.class);
 
     /**
      * 钉钉用户登录，显示当前登录用户的userId和名称
@@ -38,13 +31,14 @@ public class IndexController {
      * @param requestAuthCode 免登临时code
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    
     @ResponseBody
     public ServiceResult login(@RequestParam(value = "authCode") String requestAuthCode) {
         //获取accessToken,注意正是代码要有异常流处理
         String accessToken = AccessTokenUtil.getToken();
 
         //获取用户信息
-        DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_GET_USER_INFO);
+        DingTalkClient client = new DefaultDingTalkClient(DingDingApiURLConstant.URL_GET_USER_INFO);
         OapiUserGetuserinfoRequest request = new OapiUserGetuserinfoRequest();
         request.setCode(requestAuthCode);
         request.setHttpMethod("GET");
@@ -61,7 +55,6 @@ public class IndexController {
         String userId = response.getUserid();
 
         String userName = getUserName(accessToken, userId);
-        System.out.println(userName);
         //返回结果
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("userId", userId);
@@ -79,11 +72,14 @@ public class IndexController {
      */
     private String getUserName(String accessToken, String userId) {
         try {
-            DingTalkClient client = new DefaultDingTalkClient(URLConstant.URL_USER_GET);
+            DingTalkClient client = new DefaultDingTalkClient(DingDingApiURLConstant.URL_USER_GET);
             OapiUserGetRequest request = new OapiUserGetRequest();
             request.setUserid(userId);
             request.setHttpMethod("GET");
             OapiUserGetResponse response = client.execute(request, accessToken);
+            
+            System.out.println(JSON.toJSONString(response));
+            System.out.println("OpenId="+response.getOpenId());      
             return response.getName();
         } catch (ApiException e) {
             e.printStackTrace();
