@@ -24,6 +24,30 @@ public class UserInfoController {
     	System.out.println(JSON.toJSONString(userInfo));
         return userInfo;
     }
+    
+    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
+    
+    @ResponseBody
+    public boolean updateUserInfo(@RequestParam(value = "UserInfo") UserInfo userInfo) {
+    	try{
+    		userInfoService.updateUserInfo(userInfo);
+    		return true;
+    	} catch (Exception e) {
+    		return false;
+    	}
+    }
+    
+    @RequestMapping(value = "/insertUserInfo", method = RequestMethod.POST)
+    
+    @ResponseBody
+    public boolean insertUserInfo(@RequestParam(value = "UserInfo") UserInfo userInfo) {
+    	try{
+    		userInfoService.updateUserInfo(userInfo);
+    		return true;
+    	} catch (Exception e) {
+    		return false;
+    	}
+    }
 }
 
 
