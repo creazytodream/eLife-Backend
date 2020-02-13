@@ -12,7 +12,7 @@ public class UserInfo {
 	private int staffid;
 	private String department;
 	private String office;
-	private int index;
+	private int office_index;
 	private int floor;
 	
 	public int getId() {
@@ -57,11 +57,12 @@ public class UserInfo {
 	public void setOffice(String office) {
 		this.office = office;
 	}
-	public int getIndex() {
-		return index;
+
+	public int getOffice_index() {
+		return office_index;
 	}
-	public void setIndex(int index) {
-		this.index = index;
+	public void setOffice_index(int office_index) {
+		this.office_index = office_index;
 	}
 	public int getFloor() {
 		return floor;

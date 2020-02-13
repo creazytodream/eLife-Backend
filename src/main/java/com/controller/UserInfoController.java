@@ -28,11 +28,12 @@ public class UserInfoController {
     @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
     
     @ResponseBody
-    public boolean updateUserInfo(@RequestParam(value = "UserInfo") UserInfo userInfo) {
+    public boolean updateUserInfo(@RequestBody UserInfo userInfo) {
     	try{
     		userInfoService.updateUserInfo(userInfo);
     		return true;
     	} catch (Exception e) {
+    		System.out.println(e);
     		return false;
     	}
     }
@@ -40,11 +41,12 @@ public class UserInfoController {
     @RequestMapping(value = "/insertUserInfo", method = RequestMethod.POST)
     
     @ResponseBody
-    public boolean insertUserInfo(@RequestParam(value = "UserInfo") UserInfo userInfo) {
+    public boolean insertUserInfo(@RequestBody UserInfo userInfo) {
     	try{
-    		userInfoService.updateUserInfo(userInfo);
+    		userInfoService.insertUserInfo(userInfo);
     		return true;
     	} catch (Exception e) {
+    		System.out.println(e);
     		return false;
     	}
     }
