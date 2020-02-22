@@ -21,15 +21,16 @@ public class UserInfoController {
     @ResponseBody
     public UserInfo findUserInfo(@RequestParam(value = "openid") String openid) {
     	UserInfo userInfo =  userInfoService.findUserInfo(openid);
-    	System.out.println(JSON.toJSONString(userInfo));
+    	//System.out.println(JSON.toJSONString(userInfo));
         return userInfo;
     }
     
     @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
     
     @ResponseBody
-    public boolean updateUserInfo(@RequestBody UserInfo userInfo) {
+    public boolean updateUserInfo(UserInfo userInfo) {
     	try{
+    		//System.out.println(JSON.toJSONString(userInfo));
     		userInfoService.updateUserInfo(userInfo);
     		return true;
     	} catch (Exception e) {
@@ -41,7 +42,7 @@ public class UserInfoController {
     @RequestMapping(value = "/insertUserInfo", method = RequestMethod.POST)
     
     @ResponseBody
-    public boolean insertUserInfo(@RequestBody UserInfo userInfo) {
+    public boolean insertUserInfo(UserInfo userInfo) {
     	try{
     		userInfoService.insertUserInfo(userInfo);
     		return true;
