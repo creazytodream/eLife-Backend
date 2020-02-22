@@ -33,7 +33,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     
     @ResponseBody
-    public ServiceResult login(@RequestParam(value = "authCode") String requestAuthCode) {
+    public String login(@RequestParam(value = "authCode") String requestAuthCode) {
         //获取accessToken,注意正是代码要有异常流处理
         String accessToken = AccessTokenUtil.getToken();
 
@@ -54,13 +54,15 @@ public class LoginController {
         // 获得到userId之后应用应该处理应用自身的登录会话管理（session）,避免后续的业务交互（前端到应用服务端）每次都要重新获取用户身份，提升用户体验
         String userId = response.getUserid();
 
-        String userName = getUserName(accessToken, userId);
+        OapiUserGetResponse userInfo = getUserInfo(accessToken, userId);
+        
+        //System.out.println(JSON.toJSONString(userInfo.getBody()));
         //返回结果
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("userId", userId);
-        resultMap.put("userName", userName);
-        ServiceResult serviceResult = ServiceResult.success(resultMap);
-        return serviceResult;
+        //Map<String, Object> resultMap = new HashMap<>();
+        //resultMap.put("userId", userId);
+        //resultMap.put("userName", userName);
+        //ServiceResult serviceResult = ServiceResult.success(resultMap);
+        return userInfo.getBody();
     }
 
     /**
@@ -70,17 +72,15 @@ public class LoginController {
      * @param userId
      * @return
      */
-    private String getUserName(String accessToken, String userId) {
+    private OapiUserGetResponse getUserInfo(String accessToken, String userId) {
         try {
             DingTalkClient client = new DefaultDingTalkClient(DingDingApiURLConstant.URL_USER_GET);
             OapiUserGetRequest request = new OapiUserGetRequest();
             request.setUserid(userId);
             request.setHttpMethod("GET");
             OapiUserGetResponse response = client.execute(request, accessToken);
-            
-            System.out.println(JSON.toJSONString(response));
-            System.out.println("OpenId="+response.getOpenId());      
-            return response.getName();
+                
+            return response;
         } catch (ApiException e) {
             e.printStackTrace();
             return null;
