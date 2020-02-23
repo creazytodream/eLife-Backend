@@ -2,8 +2,10 @@ package com.mapper;
 
 import java.util.List;
 
-import com.entity.Goodslist;
+import org.apache.ibatis.annotations.Mapper;
 
+import com.entity.Goodslist;
+@Mapper
 public interface GoodslistMapper {
 	int deleteByPrimaryKey(String productid);
 

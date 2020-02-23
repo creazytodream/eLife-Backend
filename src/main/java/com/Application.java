@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 /**
  * 启动入口
  */
-@SpringBootApplication(scanBasePackages = { "com.mapper" })
+@SpringBootApplication
 @EnableAsync
 public class Application extends SpringBootServletInitializer {
 
