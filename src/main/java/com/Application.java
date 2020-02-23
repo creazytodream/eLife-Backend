@@ -6,15 +6,13 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-import com.config.JdbcPropertiesLoader;
-
 /**
  * 启动入口
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "com.mapper" })
 @EnableAsync
 public class Application extends SpringBootServletInitializer {
-	
+
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		//application.listeners(new JdbcPropertiesLoader());
@@ -22,7 +20,7 @@ public class Application extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication application = new SpringApplication(Application.class);
+		final SpringApplication application = new SpringApplication(Application.class);
 		//application.addListeners(new JdbcPropertiesLoader());
 		application.run(args);
 	}

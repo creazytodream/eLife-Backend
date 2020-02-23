@@ -150,4 +150,15 @@
       goodsDate = #{goodsdate,jdbcType=DATE}
     where productId = #{productid,jdbcType=CHAR}
   </update>
+  
+  
+  <!-- find Storelist -->
+  <select id="findGoodslistByStoreId" parameterType="java.lang.String" resultType="com.entity.Goodslist">
+	 select 
+    <include refid="Base_Column_List" />
+    from goodsList
+    where productStatus = 1 and storeId = #{storeId,jdbcType=CHAR}
+  </select>
+  
+  
 </mapper>

@@ -9,27 +9,27 @@ import com.service.UserInfoService;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService{
-	
-	@Autowired
-    private UserInfoMapper userInfoMapper;
-    
-    @Override
-    public void insertUserInfo(UserInfo userInfo) {
-    	userInfoMapper.insertUserInfo(userInfo);
-    }
-    
-    @Override
-    public void updateUserInfo(UserInfo userInfo) {
-    	userInfoMapper.updateUserInfo(userInfo);
-    }
 
-    @Override
-    public UserInfo findUserInfo(String openid) {
-    	return userInfoMapper.findUserInfo(openid);
-    }
-  
-    @Override
-    public void deleteUserInfo(int id) {
-    	userInfoMapper.deleteUserInfo(id);
-    }
+	@Autowired
+	private UserInfoMapper userInfoMapper;
+
+	@Override
+	public void insertUserInfo(UserInfo userInfo) {
+		userInfoMapper.insertUserInfo(userInfo);
+	}
+
+	@Override
+	public void updateUserInfo(UserInfo userInfo) {
+		userInfoMapper.updateUserInfo(userInfo);
+	}
+
+	@Override
+	public UserInfo findUserInfo(String openid) {
+		return userInfoMapper.findUserInfo(openid);
+	}
+
+	@Override
+	public void deleteUserInfo(int id) {
+		userInfoMapper.deleteUserInfo(id);
+	}
 }

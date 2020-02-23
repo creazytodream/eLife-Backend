@@ -125,4 +125,12 @@
       promotionPic = #{promotionpic,jdbcType=VARCHAR}
     where storeId = #{storeid,jdbcType=CHAR}
   </update>
+  
+  <!-- find Storelist -->
+  <select id="findStorelist" parameterType="java.lang.String" resultType="com.entity.Storelist">
+	 select 
+	 <include refid="Base_Column_List" />
+	 from storeList
+	 where storeStatus = 1
+  </select>
 </mapper>
