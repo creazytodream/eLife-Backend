@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.GoodslistMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Goodslist">
+    <id column="productId" jdbcType="CHAR" property="productid" />
+    <result column="productName" jdbcType="VARCHAR" property="productname" />
+    <result column="productPrice" jdbcType="DECIMAL" property="productprice" />
+    <result column="productStock" jdbcType="INTEGER" property="productstock" />
+    <result column="productDesc" jdbcType="VARCHAR" property="productdesc" />
+    <result column="productStatus" jdbcType="INTEGER" property="productstatus" />
+    <result column="categoryType" jdbcType="INTEGER" property="categorytype" />
+    <result column="productIcon" jdbcType="VARCHAR" property="producticon" />
+    <result column="storeId" jdbcType="CHAR" property="storeid" />
+    <result column="goodsDate" jdbcType="DATE" property="goodsdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    productId, productName, productPrice, productStock, productDesc, productStatus, categoryType, 
+    productIcon, storeId, goodsDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goodsList
+    where productId = #{productid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from goodsList
+    where productId = #{productid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Goodslist">
+    <selectKey keyProperty="productid" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goodsList (productName, productPrice, productStock, 
+      productDesc, productStatus, categoryType, 
+      productIcon, storeId, goodsDate
+      )
+    values (#{productname,jdbcType=VARCHAR}, #{productprice,jdbcType=DECIMAL}, #{productstock,jdbcType=INTEGER}, 
+      #{productdesc,jdbcType=VARCHAR}, #{productstatus,jdbcType=INTEGER}, #{categorytype,jdbcType=INTEGER}, 
+      #{producticon,jdbcType=VARCHAR}, #{storeid,jdbcType=CHAR}, #{goodsdate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Goodslist">
+    <selectKey keyProperty="productid" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into goodsList
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productname != null">
+        productName,
+      </if>
+      <if test="productprice != null">
+        productPrice,
+      </if>
+      <if test="productstock != null">
+        productStock,
+      </if>
+      <if test="productdesc != null">
+        productDesc,
+      </if>
+      <if test="productstatus != null">
+        productStatus,
+      </if>
+      <if test="categorytype != null">
+        categoryType,
+      </if>
+      <if test="producticon != null">
+        productIcon,
+      </if>
+      <if test="storeid != null">
+        storeId,
+      </if>
+      <if test="goodsdate != null">
+        goodsDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productprice != null">
+        #{productprice,jdbcType=DECIMAL},
+      </if>
+      <if test="productstock != null">
+        #{productstock,jdbcType=INTEGER},
+      </if>
+      <if test="productdesc != null">
+        #{productdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="productstatus != null">
+        #{productstatus,jdbcType=INTEGER},
+      </if>
+      <if test="categorytype != null">
+        #{categorytype,jdbcType=INTEGER},
+      </if>
+      <if test="producticon != null">
+        #{producticon,jdbcType=VARCHAR},
+      </if>
+      <if test="storeid != null">
+        #{storeid,jdbcType=CHAR},
+      </if>
+      <if test="goodsdate != null">
+        #{goodsdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Goodslist">
+    update goodsList
+    <set>
+      <if test="productname != null">
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="productprice != null">
+        productPrice = #{productprice,jdbcType=DECIMAL},
+      </if>
+      <if test="productstock != null">
+        productStock = #{productstock,jdbcType=INTEGER},
+      </if>
+      <if test="productdesc != null">
+        productDesc = #{productdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="productstatus != null">
+        productStatus = #{productstatus,jdbcType=INTEGER},
+      </if>
+      <if test="categorytype != null">
+        categoryType = #{categorytype,jdbcType=INTEGER},
+      </if>
+      <if test="producticon != null">
+        productIcon = #{producticon,jdbcType=VARCHAR},
+      </if>
+      <if test="storeid != null">
+        storeId = #{storeid,jdbcType=CHAR},
+      </if>
+      <if test="goodsdate != null">
+        goodsDate = #{goodsdate,jdbcType=DATE},
+      </if>
+    </set>
+    where productId = #{productid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Goodslist">
+    update goodsList
+    set productName = #{productname,jdbcType=VARCHAR},
+      productPrice = #{productprice,jdbcType=DECIMAL},
+      productStock = #{productstock,jdbcType=INTEGER},
+      productDesc = #{productdesc,jdbcType=VARCHAR},
+      productStatus = #{productstatus,jdbcType=INTEGER},
+      categoryType = #{categorytype,jdbcType=INTEGER},
+      productIcon = #{producticon,jdbcType=VARCHAR},
+      storeId = #{storeid,jdbcType=CHAR},
+      goodsDate = #{goodsdate,jdbcType=DATE}
+    where productId = #{productid,jdbcType=CHAR}
+  </update>
+</mapper>

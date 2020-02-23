@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.StorelistMapper">
+  <resultMap id="BaseResultMap" type="com.entity.Storelist">
+    <id column="storeId" jdbcType="CHAR" property="storeid" />
+    <result column="storeName" jdbcType="VARCHAR" property="storename" />
+    <result column="storeStatus" jdbcType="INTEGER" property="storestatus" />
+    <result column="storeInfo" jdbcType="VARCHAR" property="storeinfo" />
+    <result column="storeAddr" jdbcType="VARCHAR" property="storeaddr" />
+    <result column="storeTel" jdbcType="VARCHAR" property="storetel" />
+    <result column="storePic" jdbcType="VARCHAR" property="storepic" />
+    <result column="promotionPic" jdbcType="VARCHAR" property="promotionpic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    storeId, storeName, storeStatus, storeInfo, storeAddr, storeTel, storePic, promotionPic
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from storeList
+    where storeId = #{storeid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from storeList
+    where storeId = #{storeid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Storelist">
+    <selectKey keyProperty="storeid" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into storeList (storeName, storeStatus, storeInfo, 
+      storeAddr, storeTel, storePic, 
+      promotionPic)
+    values (#{storename,jdbcType=VARCHAR}, #{storestatus,jdbcType=INTEGER}, #{storeinfo,jdbcType=VARCHAR}, 
+      #{storeaddr,jdbcType=VARCHAR}, #{storetel,jdbcType=VARCHAR}, #{storepic,jdbcType=VARCHAR}, 
+      #{promotionpic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Storelist">
+    <selectKey keyProperty="storeid" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into storeList
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="storename != null">
+        storeName,
+      </if>
+      <if test="storestatus != null">
+        storeStatus,
+      </if>
+      <if test="storeinfo != null">
+        storeInfo,
+      </if>
+      <if test="storeaddr != null">
+        storeAddr,
+      </if>
+      <if test="storetel != null">
+        storeTel,
+      </if>
+      <if test="storepic != null">
+        storePic,
+      </if>
+      <if test="promotionpic != null">
+        promotionPic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="storename != null">
+        #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="storestatus != null">
+        #{storestatus,jdbcType=INTEGER},
+      </if>
+      <if test="storeinfo != null">
+        #{storeinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeaddr != null">
+        #{storeaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="storetel != null">
+        #{storetel,jdbcType=VARCHAR},
+      </if>
+      <if test="storepic != null">
+        #{storepic,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionpic != null">
+        #{promotionpic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Storelist">
+    update storeList
+    <set>
+      <if test="storename != null">
+        storeName = #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="storestatus != null">
+        storeStatus = #{storestatus,jdbcType=INTEGER},
+      </if>
+      <if test="storeinfo != null">
+        storeInfo = #{storeinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeaddr != null">
+        storeAddr = #{storeaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="storetel != null">
+        storeTel = #{storetel,jdbcType=VARCHAR},
+      </if>
+      <if test="storepic != null">
+        storePic = #{storepic,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionpic != null">
+        promotionPic = #{promotionpic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where storeId = #{storeid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Storelist">
+    update storeList
+    set storeName = #{storename,jdbcType=VARCHAR},
+      storeStatus = #{storestatus,jdbcType=INTEGER},
+      storeInfo = #{storeinfo,jdbcType=VARCHAR},
+      storeAddr = #{storeaddr,jdbcType=VARCHAR},
+      storeTel = #{storetel,jdbcType=VARCHAR},
+      storePic = #{storepic,jdbcType=VARCHAR},
+      promotionPic = #{promotionpic,jdbcType=VARCHAR}
+    where storeId = #{storeid,jdbcType=CHAR}
+  </update>
+</mapper>
