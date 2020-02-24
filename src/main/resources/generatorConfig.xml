@@ -43,12 +43,18 @@
             selectByExampleQueryId="false">
             <generatedKey column="productId" sqlStatement="MySql" identity="true" />
     </table>  
- -->
+ 
     <table schema="elife" tableName="storeList"  enableCountByExample="false" enableUpdateByExample="false"
             enableDeleteByExample="false" enableSelectByExample="false"
             selectByExampleQueryId="false">
             <generatedKey column="storeId" sqlStatement="MySql" identity="true" />
-    </table>  
-  
+    </table>
+   
+    <table schema="elife" tableName="config"  enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="paraname" sqlStatement="MySql" identity="true" />
+    </table>   
+  --> 
   </context>
 </generatorConfiguration>

@@ -30,7 +30,7 @@ public class LoginController {
      *
      * @param requestAuthCode 免登临时code
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/ddlogin", method = RequestMethod.POST)
     
     @ResponseBody
     public String login(@RequestParam(value = "authCode") String requestAuthCode) {
