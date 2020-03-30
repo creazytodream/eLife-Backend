@@ -15,6 +15,8 @@ public class Orderlist {
 
 	private String orderamount;
 
+	private String remarks;
+	
 	public String getOrderid() {
 		return orderid;
 	}
@@ -61,6 +63,14 @@ public class Orderlist {
 
 	public void setOrderamount(String orderamount) {
 		this.orderamount = orderamount;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 
 
