@@ -55,6 +55,20 @@
             selectByExampleQueryId="false">
             <generatedKey column="paraname" sqlStatement="MySql" identity="true" />
     </table>   
-  --> 
+   
+  
+    <table schema="elife" tableName="orderList"  enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="orderId" sqlStatement="MySql" identity="true" />
+    </table>
+-->
+
+    <table schema="elife" tableName="orderDetail"  enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+            <generatedKey column="orderId" sqlStatement="MySql" identity="true" />
+    </table>
+        
   </context>
 </generatorConfiguration>

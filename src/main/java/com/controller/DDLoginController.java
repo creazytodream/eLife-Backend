@@ -22,8 +22,8 @@ import java.util.Map;
  * 企业内部E应用Quick-Start示例代码 实现了最简单的免密登录（免登）功能
  */
 @RestController
-public class LoginController {
-    private static final Logger bizLogger = LoggerFactory.getLogger(LoginController.class);
+public class DDLoginController {
+    private static final Logger bizLogger = LoggerFactory.getLogger(DDLoginController.class);
 
     /**
      * 钉钉用户登录，显示当前登录用户的userId和名称
@@ -33,7 +33,7 @@ public class LoginController {
     @RequestMapping(value = "/ddlogin", method = RequestMethod.POST)
     
     @ResponseBody
-    public String login(@RequestParam(value = "authCode") String requestAuthCode) {
+    public String ddlogin(@RequestParam(value = "authCode") String requestAuthCode) {
         //获取accessToken,注意正是代码要有异常流处理
         String accessToken = AccessTokenUtil.getToken();
 
