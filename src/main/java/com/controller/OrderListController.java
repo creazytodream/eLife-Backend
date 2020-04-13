@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.entity.Orderlist;
 import com.service.OrderlistService;
 
@@ -23,6 +24,7 @@ public class OrderListController {
 	@ResponseBody
     public boolean insertOrderList(Orderlist orderlist) {
     	try{
+    		//System.out.println(JSON.toJSONString(orderlist));
     		orderlistService.insert(orderlist);
     		return true;
     	} catch (Exception e) {

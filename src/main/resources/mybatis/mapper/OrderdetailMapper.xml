@@ -11,9 +11,9 @@
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into orderDetail (storeId, productId, quantity
+    insert into orderDetail (orderId, storeId, productId, quantity
       )
-    values (#{storeid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}
+    values (#{orderid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.entity.Orderdetail">
@@ -22,6 +22,9 @@
     </selectKey>
     insert into orderDetail
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        orderId,
+      </if>
       <if test="storeid != null">
         storeId,
       </if>
@@ -33,6 +36,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=VARCHAR},
+      </if>
       <if test="storeid != null">
         #{storeid,jdbcType=VARCHAR},
       </if>
