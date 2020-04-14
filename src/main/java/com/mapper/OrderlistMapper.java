@@ -1,5 +1,7 @@
 package com.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.entity.Orderlist;
@@ -17,4 +19,6 @@ public interface OrderlistMapper {
 	int updateByPrimaryKeySelective(Orderlist record);
 
 	int updateByPrimaryKey(Orderlist record);
+	
+	public List<Orderlist> findOrderlist(String openid, String orderstatus, String orderdate);
 }

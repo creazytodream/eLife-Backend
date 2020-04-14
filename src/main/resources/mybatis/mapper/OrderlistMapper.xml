@@ -112,4 +112,12 @@
       remarks = #{remarks,jdbcType=VARCHAR}
     where orderId = #{orderid,jdbcType=VARCHAR}
   </update>
+  
+  <select id="findOrderlist" parameterType="java.lang.String" resultType="com.entity.Orderlist">
+	 select 
+    <include refid="Base_Column_List" />
+    from orderList
+    where openid = #{arg0,jdbcType=CHAR} and orderstatus = #{arg1,jdbcType=CHAR}
+    and Date(orderdate) = #{arg2,jdbcType=CHAR}
+  </select>
 </mapper>
