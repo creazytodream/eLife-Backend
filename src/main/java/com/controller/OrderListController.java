@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.entity.Goodslist;
 import com.entity.Orderlist;
+import com.service.OrderdetailService;
 import com.service.OrderlistService;
 
 @RestController
@@ -25,6 +26,9 @@ public class OrderListController {
 	@Autowired
 	private OrderlistService orderlistService;
 
+	@Autowired
+	private OrderdetailService orderdetailService;
+	
 	@RequestMapping(value = "/insertOrderList", method = RequestMethod.POST)
 
 	@ResponseBody
@@ -46,7 +50,13 @@ public class OrderListController {
     		System.out.println(openid);
     		//System.out.println(orderstatus);
     		//System.out.println(orderdate);
-    		return orderlistService.findOrderlist(openid, orderstatus, orderdate);
+    		//return orderlistService.findOrderlist(openid, orderstatus, orderdate);
+    		
+    		List<Orderlist> orderlist = orderlistService.findOrderlist(openid, orderstatus, orderdate);
+    		for(Orderlist order : orderlist){
+    			order.setOrderDetailList(orderdetailService.findOrderdetail(order.getOrderid()));
+    		}
+    		return orderlist;
     }
 
 }

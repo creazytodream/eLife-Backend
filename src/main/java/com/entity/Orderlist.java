@@ -1,6 +1,7 @@
 package com.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Orderlist {
     private String orderid;
@@ -16,6 +17,8 @@ public class Orderlist {
 	private String orderamount;
 
 	private String remarks;
+	
+	private List<Orderdetail> orderDetailList;
 	
 	public String getOrderid() {
 		return orderid;
@@ -71,6 +74,14 @@ public class Orderlist {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public List<Orderdetail> getOrderDetailList() {
+		return orderDetailList;
+	}
+
+	public void setOrderDetailList(List<Orderdetail> orderDetailList) {
+		this.orderDetailList = orderDetailList;
 	}
 
 
