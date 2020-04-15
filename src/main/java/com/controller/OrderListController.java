@@ -54,6 +54,9 @@ public class OrderListController {
     		
     		List<Orderlist> orderlist = orderlistService.findOrderlist(openid, orderstatus, orderdate);
     		for(Orderlist order : orderlist){
+    			
+    			System.out.println(order.getOrderdate());
+    			
     			order.setOrderDetailList(orderdetailService.findOrderdetail(order.getOrderid()));
     		}
     		return orderlist;

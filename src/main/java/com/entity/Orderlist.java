@@ -8,7 +8,7 @@ public class Orderlist {
 
 	private String openid;
 
-	private Date orderdate;
+	private String orderdate;
 
 	private String orderstatus;
 
@@ -34,14 +34,6 @@ public class Orderlist {
 
 	public void setOpenid(String openid) {
 		this.openid = openid;
-	}
-
-	public Date getOrderdate() {
-		return orderdate;
-	}
-
-	public void setOrderdate(Date orderdate) {
-		this.orderdate = orderdate;
 	}
 
 	public String getOrderstatus() {
@@ -82,6 +74,14 @@ public class Orderlist {
 
 	public void setOrderDetailList(List<Orderdetail> orderDetailList) {
 		this.orderDetailList = orderDetailList;
+	}
+
+	public String getOrderdate() {
+		return orderdate;
+	}
+
+	public void setOrderdate(String orderdate) {
+		this.orderdate = orderdate;
 	}
 
 
