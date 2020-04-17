@@ -47,7 +47,7 @@ public class OrderListController {
 
 	@ResponseBody
     public List<Orderlist> findOrderlist(@RequestParam(value = "openid") String openid, String orderstatus, String orderdate) {
-    		System.out.println(openid);
+    		//System.out.println(openid);
     		//System.out.println(orderstatus);
     		//System.out.println(orderdate);
     		//return orderlistService.findOrderlist(openid, orderstatus, orderdate);
@@ -55,7 +55,7 @@ public class OrderListController {
     		List<Orderlist> orderlist = orderlistService.findOrderlist(openid, orderstatus, orderdate);
     		for(Orderlist order : orderlist){
     			
-    			System.out.println(order.getOrderdate());
+    			//System.out.println(order.getOrderdate());
     			
     			order.setOrderDetailList(orderdetailService.findOrderdetail(order.getOrderid()));
     		}

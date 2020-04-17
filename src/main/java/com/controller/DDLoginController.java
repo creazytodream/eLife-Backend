@@ -10,13 +10,9 @@ import com.dingtalk.api.response.OapiUserGetResponse;
 import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
 import com.taobao.api.ApiException;
 import com.util.AccessTokenUtil;
-import com.util.ServiceResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 企业内部E应用Quick-Start示例代码 实现了最简单的免密登录（免登）功能
@@ -34,6 +30,8 @@ public class DDLoginController {
     
     @ResponseBody
     public String ddlogin(@RequestParam(value = "authCode") String requestAuthCode) {
+    	bizLogger.info("ddlogin authCode = ", requestAuthCode);
+    	
         //获取accessToken,注意正是代码要有异常流处理
         String accessToken = AccessTokenUtil.getToken();
 
@@ -48,6 +46,8 @@ public class DDLoginController {
             response = client.execute(request, accessToken);
         } catch (ApiException e) {
             e.printStackTrace();
+            
+            bizLogger.error("ddlogin URL_GET_USER_INFO api exception", e);
             return null;
         }
         //3.查询得到当前用户的userId
@@ -62,6 +62,9 @@ public class DDLoginController {
         //resultMap.put("userId", userId);
         //resultMap.put("userName", userName);
         //ServiceResult serviceResult = ServiceResult.success(resultMap);
+        
+        bizLogger.info("ddlogin response = ", userInfo.getBody());
+        
         return userInfo.getBody();
     }
 
@@ -83,6 +86,8 @@ public class DDLoginController {
             return response;
         } catch (ApiException e) {
             e.printStackTrace();
+            
+            bizLogger.error("ddlogin URL_USER_GET api exception", e);
             return null;
         }
     }

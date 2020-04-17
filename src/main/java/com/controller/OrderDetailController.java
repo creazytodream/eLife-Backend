@@ -41,7 +41,7 @@ public class OrderDetailController {
 
 	@ResponseBody
     public List<Orderdetail> findOrderdetail(@RequestParam(value = "orderid") String orderid) {
-    		System.out.println(orderid);
+    		//System.out.println(orderid);
     		return orderdetailService.findOrderdetail(orderid);
     }
 
