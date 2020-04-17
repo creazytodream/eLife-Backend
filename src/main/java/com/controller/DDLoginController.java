@@ -30,7 +30,7 @@ public class DDLoginController {
     
     @ResponseBody
     public String ddlogin(@RequestParam(value = "authCode") String requestAuthCode) {
-    	bizLogger.info("ddlogin authCode = ", requestAuthCode);
+    	bizLogger.info("ddlogin authCode = "+requestAuthCode);
     	
         //获取accessToken,注意正是代码要有异常流处理
         String accessToken = AccessTokenUtil.getToken();
@@ -63,7 +63,7 @@ public class DDLoginController {
         //resultMap.put("userName", userName);
         //ServiceResult serviceResult = ServiceResult.success(resultMap);
         
-        bizLogger.info("ddlogin response = ", userInfo.getBody());
+        bizLogger.info("ddlogin response = "+userInfo.getBody());
         
         return userInfo.getBody();
     }
