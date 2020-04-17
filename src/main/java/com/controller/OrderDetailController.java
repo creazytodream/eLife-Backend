@@ -27,6 +27,7 @@ public class OrderDetailController {
 
 	@ResponseBody
     public boolean insertOrderDetail(Orderdetail orderdetail) {
+		bizLogger.info("insertOrderDetail");
     	try{
     		//System.out.println("OrderDetailController request = "+JSON.toJSONString(orderdetail));
     		orderdetailService.insert(orderdetail);
@@ -41,6 +42,7 @@ public class OrderDetailController {
 
 	@ResponseBody
     public List<Orderdetail> findOrderdetail(@RequestParam(value = "orderid") String orderid) {
+			bizLogger.info("findOrderdetail orderid = "+orderid);
     		//System.out.println(orderid);
     		return orderdetailService.findOrderdetail(orderid);
     }

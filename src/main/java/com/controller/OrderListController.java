@@ -33,6 +33,7 @@ public class OrderListController {
 
 	@ResponseBody
     public boolean insertOrderList(Orderlist orderlist) {
+		bizLogger.info("insertOrderList orderId = "+orderlist.getOrderid());
     	try{
     		//System.out.println(JSON.toJSONString(orderlist));
     		orderlistService.insert(orderlist);
@@ -47,6 +48,7 @@ public class OrderListController {
 
 	@ResponseBody
     public List<Orderlist> findOrderlist(@RequestParam(value = "openid") String openid, String orderstatus, String orderdate) {
+		bizLogger.info("findOrderlist openid = "+openid);
     		//System.out.println(openid);
     		//System.out.println(orderstatus);
     		//System.out.println(orderdate);

@@ -24,6 +24,7 @@ public class StoreListController {
 
 	@ResponseBody
 	public List<Storelist> findStorelist() {
+		bizLogger.info("findStorelist");
 		final List<Storelist> storelist = storelistService.findStorelist();
 		//System.out.println(JSON.toJSONString(userInfo));
 		return storelist;

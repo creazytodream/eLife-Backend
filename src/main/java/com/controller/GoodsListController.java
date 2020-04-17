@@ -26,6 +26,7 @@ public class GoodsListController {
 
 	@ResponseBody
 	public List<Goodslist> findGoodslistByStoreId(String storeId) {
+		bizLogger.info("findGoodslistByStoreId storeId = "+storeId);
 		final List<Goodslist> storelist = goodslistService.findGoodslistByStoreId(storeId);
 		//System.out.println(JSON.toJSONString(userInfo));
 		return storelist;

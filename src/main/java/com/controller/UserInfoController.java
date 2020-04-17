@@ -20,6 +20,7 @@ public class UserInfoController {
     
     @ResponseBody
     public UserInfo findUserInfo(@RequestParam(value = "openid") String openid) {
+    	bizLogger.info("findUserInfo openid = "+openid);
     	UserInfo userInfo =  userInfoService.findUserInfo(openid);
     	//System.out.println(JSON.toJSONString(userInfo));
         return userInfo;
@@ -29,12 +30,13 @@ public class UserInfoController {
     
     @ResponseBody
     public boolean updateUserInfo(UserInfo userInfo) {
+    	bizLogger.info("updateUserInfo openid = "+userInfo.getOpenid());
     	try{
     		//System.out.println(JSON.toJSONString(userInfo));
     		userInfoService.updateUserInfo(userInfo);
     		return true;
     	} catch (Exception e) {
-    		System.out.println(e);
+    		bizLogger.error("updateUserInfo", e);
     		return false;
     	}
     }
@@ -43,11 +45,12 @@ public class UserInfoController {
     
     @ResponseBody
     public boolean insertUserInfo(UserInfo userInfo) {
+    	bizLogger.info("insertUserInfo openid = "+userInfo.getOpenid());
     	try{
     		userInfoService.insertUserInfo(userInfo);
     		return true;
     	} catch (Exception e) {
-    		System.out.println(e);
+    		bizLogger.error("insertUserInfo", e);
     		return false;
     	}
     }
