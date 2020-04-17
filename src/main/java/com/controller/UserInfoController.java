@@ -23,6 +23,8 @@ public class UserInfoController {
     	bizLogger.info("findUserInfo openid = "+openid);
     	UserInfo userInfo =  userInfoService.findUserInfo(openid);
     	//System.out.println(JSON.toJSONString(userInfo));
+    	
+    	bizLogger.info("findUserInfo response = "+JSON.toJSONString(userInfo));
         return userInfo;
     }
     
