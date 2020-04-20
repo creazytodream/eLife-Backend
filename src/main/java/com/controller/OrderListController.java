@@ -39,7 +39,7 @@ public class OrderListController {
     		orderlistService.insert(orderlist);
     		return true;
     	} catch (Exception e) {
-    		System.out.println(e);
+    		bizLogger.error("insertOrderList"+e);
     		return false;
     	}
     }
@@ -47,23 +47,30 @@ public class OrderListController {
 	@RequestMapping(value = "/findOrderlist", method = RequestMethod.POST)
 
 	@ResponseBody
-    public List<Orderlist> findOrderlist(@RequestParam(value = "openid") String openid, String orderstatus, String orderdate) {
-		bizLogger.info("findOrderlist openid = "+openid);
-    		//System.out.println(openid);
-    		//System.out.println(orderstatus);
-    		//System.out.println(orderdate);
-    		//return orderlistService.findOrderlist(openid, orderstatus, orderdate);
+    public List<Orderlist> findOrderlist(@RequestParam(value = "openid") String openid, String orderstatus) {
+		bizLogger.info("findOrderlist openid ["+openid+"] orderstatus ["+orderstatus+"]");
     		
-    		List<Orderlist> orderlist = orderlistService.findOrderlist(openid, orderstatus, orderdate);
-    		for(Orderlist order : orderlist){
-    			
-    			//System.out.println(order.getOrderdate());
-    			
-    			order.setOrderDetailList(orderdetailService.findOrderdetail(order.getOrderid()));
-    		}
-    		return orderlist;
+    	List<Orderlist> orderlist = orderlistService.findOrderlist(openid, orderstatus);
+    	for(Orderlist order : orderlist){
+    		order.setOrderDetailList(orderdetailService.findOrderdetail(order.getOrderid()));
+    	}
+    	return orderlist;
     }
 
+	@RequestMapping(value = "/updateOrderStaus", method = RequestMethod.POST)
+
+	@ResponseBody
+    public boolean updateOrderStaus(@RequestParam(value = "orderid") String orderid) {
+		bizLogger.info("updateOrderStaus orderid ["+orderid+"]");
+    		
+    	try{    		
+    		//orderlistService.insert(orderlist);
+    		return true;
+    	} catch (Exception e) {
+    		bizLogger.error("updateOrderStaus"+e);
+    		return false;
+    	}
+    }
 }
 
 

@@ -21,8 +21,8 @@ public class OrderlistServiceImpl implements OrderlistService {
 	}
 	
 	@Override
-	public List<Orderlist> findOrderlist(String openid, String orderstatus, String orderdate) {
-		return orderlistMapper.findOrderlist(openid, orderstatus, orderdate);
+	public List<Orderlist> findOrderlist(String openid, String orderstatus) {
+		return orderlistMapper.findOrderlist(openid, orderstatus);
 	}
 
 }

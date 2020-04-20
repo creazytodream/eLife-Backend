@@ -20,5 +20,5 @@ public interface OrderlistMapper {
 
 	int updateByPrimaryKey(Orderlist record);
 	
-	public List<Orderlist> findOrderlist(String openid, String orderstatus, String orderdate);
+	public List<Orderlist> findOrderlist(String openid, String orderstatus);
 }

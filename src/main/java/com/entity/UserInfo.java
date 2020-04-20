@@ -9,7 +9,7 @@ public class UserInfo {
 	private String openid;
 	private String username;
 	private int phone;
-	private int staffid;
+	private String staffid;
 	private String department;
 	private String office;
 	private int office_index;
@@ -39,12 +39,7 @@ public class UserInfo {
 	public void setPhone(int phone) {
 		this.phone = phone;
 	}
-	public int getStaffid() {
-		return staffid;
-	}
-	public void setStaffid(int staffid) {
-		this.staffid = staffid;
-	}
+
 	public String getDepartment() {
 		return department;
 	}
@@ -69,5 +64,11 @@ public class UserInfo {
 	}
 	public void setFloor(int floor) {
 		this.floor = floor;
+	}
+	public String getStaffid() {
+		return staffid;
+	}
+	public void setStaffid(String staffid) {
+		this.staffid = staffid;
 	}
 }

@@ -51,10 +51,6 @@
     </trim>
   </insert>
   
-  <sql id="Base_Column_List">
-    orderId, storeId, productId, quantity
-  </sql>
-  
   <select id="findOrderdetail" parameterType="java.lang.String" resultType="Map">
 	select a.quantity, b.storeName, c.productName, c.productIcon, c.productPrice
     from orderDetail a
