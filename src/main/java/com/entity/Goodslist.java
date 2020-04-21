@@ -22,7 +22,7 @@ public class Goodslist {
 
     private String storeid;
 
-    private Date goodsdate;
+    private String goodsdate;
 
     public String getProductid() {
         return productid;
@@ -96,11 +96,11 @@ public class Goodslist {
         this.storeid = storeid == null ? null : storeid.trim();
     }
 
-    public Date getGoodsdate() {
+    public String getGoodsdate() {
         return goodsdate;
     }
 
-    public void setGoodsdate(Date goodsdate) {
+    public void setGoodsdate(String goodsdate) {
         this.goodsdate = goodsdate;
     }
 }

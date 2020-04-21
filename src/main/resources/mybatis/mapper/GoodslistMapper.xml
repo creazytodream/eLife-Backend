@@ -147,7 +147,7 @@
       categoryType = #{categorytype,jdbcType=INTEGER},
       productIcon = #{producticon,jdbcType=VARCHAR},
       storeId = #{storeid,jdbcType=CHAR},
-      goodsDate = #{goodsdate,jdbcType=DATE}
+      goodsDate = #{goodsdate,jdbcType=VARCHAR}
     where productId = #{productid,jdbcType=CHAR}
   </update>
   
@@ -159,6 +159,5 @@
     from goodsList
     where productStatus = 1 and storeId = #{storeId,jdbcType=CHAR}
   </select>
-  
   
 </mapper>
