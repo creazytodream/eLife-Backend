@@ -118,6 +118,7 @@
     from orderList
     where openid = #{arg0,jdbcType=CHAR}
     and orderstatus = #{arg1,jdbcType=CHAR}
+    order by orderDate desc
   </select>
   
   <update id="updateOrderStaus" parameterType="java.lang.String">
