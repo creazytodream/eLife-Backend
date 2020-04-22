@@ -64,7 +64,7 @@ public class OrderListController {
 		bizLogger.info("updateOrderStaus orderid ["+orderid+"]");
     		
     	try{    		
-    		//orderlistService.insert(orderlist);
+    		orderlistService.updateOrderStaus(orderid);
     		return true;
     	} catch (Exception e) {
     		bizLogger.error("updateOrderStaus"+e);

@@ -114,9 +114,15 @@
   </update>
   
   <select id="findOrderlist" parameterType="java.lang.String" resultType="com.entity.Orderlist">
-	select orderid, orderDate, orderQuantity, orderAmount, remarks
+	select orderid, DATE_FORMAT(orderdate,"%Y-%m-%d %T") as orderDate, orderQuantity, orderAmount, remarks
     from orderList
     where openid = #{arg0,jdbcType=CHAR}
     and orderstatus = #{arg1,jdbcType=CHAR}
   </select>
+  
+  <update id="updateOrderStaus" parameterType="java.lang.String">
+    update orderList
+    set orderStatus = '2'
+    where orderId = #{orderid,jdbcType=VARCHAR}
+  </update>
 </mapper>

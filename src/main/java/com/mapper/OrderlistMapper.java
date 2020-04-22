@@ -10,7 +10,7 @@ import com.entity.Orderlist;
 public interface OrderlistMapper {
     int deleteByPrimaryKey(String orderid);
 
-	int insert(Orderlist record);
+    public int insert(Orderlist record);
 
 	int insertSelective(Orderlist record);
 
@@ -21,4 +21,6 @@ public interface OrderlistMapper {
 	int updateByPrimaryKey(Orderlist record);
 	
 	public List<Orderlist> findOrderlist(String openid, String orderstatus);
+	
+	public int updateOrderStaus(String orderid);
 }

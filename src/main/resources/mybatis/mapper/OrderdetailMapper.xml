@@ -6,14 +6,15 @@
     <result column="storeId" jdbcType="VARCHAR" property="storeid" />
     <result column="productId" jdbcType="VARCHAR" property="productid" />
     <result column="quantity" jdbcType="VARCHAR" property="quantity" />
+    <result column="office" jdbcType="VARCHAR" property="quantity" />
   </resultMap>
   <insert id="insert" parameterType="com.entity.Orderdetail">
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into orderDetail (orderId, storeId, productId, quantity
+    insert into orderDetail (orderId, storeId, productId, quantity, office
       )
-    values (#{orderid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}
+    values (#{orderid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.entity.Orderdetail">
@@ -34,6 +35,9 @@
       <if test="quantity != null">
         quantity,
       </if>
+      <if test="office != null">
+        office,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
@@ -48,14 +52,17 @@
       <if test="quantity != null">
         #{quantity,jdbcType=VARCHAR},
       </if>
+      <if test="office != null">
+        #{office,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   
   <select id="findOrderdetail" parameterType="java.lang.String" resultType="Map">
-	select a.quantity, b.storeName, c.productName, c.productIcon, c.productPrice
+	select a.quantity, a.office, b.storeName, c.goodsDate, c.productName, c.productIcon, c.productPrice
     from orderDetail a
-    left join storeList b on a.storeId=b.storeId
-    left join goodsList c on a.productId=c.productId
+    left join storeList b on a.storeId=b.storeId and b.storeStatus='1'
+    left join goodsList c on a.productId=c.productId and c.productStatus='1'
     where a.orderid = #{orderid,jdbcType=CHAR}
     order by a.storeId, a.productId
   </select>
