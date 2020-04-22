@@ -59,7 +59,7 @@
   </insert>
   
   <select id="findOrderdetail" parameterType="java.lang.String" resultType="Map">
-	select a.quantity, a.office, b.storeName, c.goodsDate, c.productName, c.productIcon, c.productPrice
+	select a.quantity, a.office, b.storeName, substring(c.goodsDate,6) as goodsDate, c.productName, c.productIcon, c.productPrice
     from orderDetail a
     left join storeList b on a.storeId=b.storeId and b.storeStatus='1'
     left join goodsList c on a.productId=c.productId and c.productStatus='1'
