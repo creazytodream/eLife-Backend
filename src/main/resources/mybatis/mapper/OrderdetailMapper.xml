@@ -64,6 +64,6 @@
     left join storeList b on a.storeId=b.storeId and b.storeStatus='1'
     left join goodsList c on a.productId=c.productId and c.productStatus='1'
     where a.orderid = #{orderid,jdbcType=CHAR}
-    order by a.storeId, a.productId
+    order by a.storeId, c.goodsDate, a.productId
   </select>
 </mapper>
