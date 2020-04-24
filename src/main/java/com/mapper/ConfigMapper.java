@@ -12,4 +12,5 @@ public interface ConfigMapper {
 	public Config selectByPrimaryKey(String paraname);
     
     public List<Config> findAllConfig();
+    public List<Config> findParaValueByParaName(String paraName);
 }

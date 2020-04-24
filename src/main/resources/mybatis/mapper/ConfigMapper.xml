@@ -62,4 +62,13 @@
     <include refid="Base_Column_List" />
     from config
   </select>
+  
+  <!-- find ParaValue By ParaName -->
+  <select id="findParaValueByParaName" resultType="com.entity.Config">
+	 select 
+    <include refid="Base_Column_List" />
+    from config
+    where paraname = #{paraName,jdbcType=VARCHAR}
+  </select>
+ 
 </mapper>

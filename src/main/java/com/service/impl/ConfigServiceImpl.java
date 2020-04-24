@@ -24,4 +24,9 @@ public class ConfigServiceImpl implements ConfigService{
 	public List<Config> findAllConfig() {
 		return configMapper.findAllConfig();
 	}
+	
+	@Override
+	public List<Config> findParaValueByParaName(String paraName) {
+		return configMapper.findParaValueByParaName(paraName);
+	};
 }
