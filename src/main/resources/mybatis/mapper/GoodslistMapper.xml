@@ -160,4 +160,12 @@
     where productStatus = 1 and storeId = #{storeId,jdbcType=CHAR}
   </select>
   
+    <!-- find ordered Goodslist By UserId -->
+  <select id="findOrderedGoodslistByUserId" parameterType="java.lang.String" resultType="com.entity.Goodslist">
+	 SELECT distinct g.* FROM orderList ol 
+		left join orderDetail od on od.orderId = ol.orderId
+		left join goodsList g on g.productId = od.productId and g.productStatus = 1
+	where ol.openid = #{openid,jdbcType=CHAR} and ol.orderStatus = 1
+  </select>
+  
 </mapper>

@@ -20,4 +20,6 @@ public interface GoodslistMapper {
 	int updateByPrimaryKey(Goodslist record);
 
 	public List<Goodslist> findGoodslistByStoreId(String storeId);
+	
+	public List<Goodslist> findOrderedGoodslistByUserId(String openid);
 }

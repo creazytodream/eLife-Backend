@@ -31,6 +31,15 @@ public class GoodsListController {
 		//System.out.println(JSON.toJSONString(userInfo));
 		return storelist;
 	}
+	
+	@RequestMapping(value = "/findOrderedGoodslistByUserId", method = RequestMethod.POST)
+
+	@ResponseBody
+	public List<Goodslist> findOrderedGoodslistByUserId(String openid) {
+		bizLogger.info("findOrderedGoodslistByUserId openid = "+openid);
+		final List<Goodslist> goodslist = goodslistService.findOrderedGoodslistByUserId(openid);
+		return goodslist;
+	}
 
 }
 
