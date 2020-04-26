@@ -37,16 +37,33 @@ public class OrderDetailController {
     		return false;
     	}
     }
-	
-	@RequestMapping(value = "/findOrderdetail", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/findOrderdetailByDepartment", method = RequestMethod.POST)
 
 	@ResponseBody
-    public List<Orderdetail> findOrderdetail(@RequestParam(value = "orderid") String orderid) {
-			bizLogger.info("findOrderdetail orderid = "+orderid);
-    		//System.out.println(orderid);
-    		return orderdetailService.findOrderdetail(orderid);
+    public List<Orderdetail> findOrderdetailByDepartment(@RequestParam(value = "department") String department, String office, String goodsDate) {
+		bizLogger.info("findOrderdetailByDepartment department ["+department+"] office ["+office+"] goodsDate ["+goodsDate+"]");
+    		
+		return orderdetailService.findOrderdetailByDepartment(department, office, goodsDate);
     }
+	
+	@RequestMapping(value = "/findOrderDepartment", method = RequestMethod.POST)
 
+	@ResponseBody
+    public List<Orderdetail> findOrderDepartment() {
+		bizLogger.info("findOrderDepartment");
+    		
+		return orderdetailService.findOrderDepartment();
+    }
+	
+	@RequestMapping(value = "/findOrderOffice", method = RequestMethod.POST)
+
+	@ResponseBody
+    public List<Orderdetail> findOrderOffice() {
+		bizLogger.info("findOrderOffice");
+    		
+		return orderdetailService.findOrderOffice();
+    }
 }
 
 

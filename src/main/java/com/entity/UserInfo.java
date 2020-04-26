@@ -14,6 +14,8 @@ public class UserInfo {
 	private String office;
 	private int office_index;
 	private int floor;
+	private String deptAdmin;
+	private String companyAdmin;
 	
 	public int getId() {
 		return id;
@@ -70,5 +72,17 @@ public class UserInfo {
 	}
 	public void setStaffid(String staffid) {
 		this.staffid = staffid;
+	}
+	public String getDeptAdmin() {
+		return deptAdmin;
+	}
+	public void setDeptAdmin(String deptAdmin) {
+		this.deptAdmin = deptAdmin;
+	}
+	public String getCompanyAdmin() {
+		return companyAdmin;
+	}
+	public void setCompanyAdmin(String companyAdmin) {
+		this.companyAdmin = companyAdmin;
 	}
 }

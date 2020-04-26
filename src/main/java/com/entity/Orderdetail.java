@@ -10,6 +10,8 @@ public class Orderdetail {
     private String quantity;
     
     private String office;
+    
+    private String department;
 
     public String getOrderid() {
         return orderid;
@@ -49,5 +51,13 @@ public class Orderdetail {
 
 	public void setOffice(String office) {
 		this.office = office;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 }
