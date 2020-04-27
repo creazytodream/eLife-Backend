@@ -111,4 +111,24 @@
     order by c.goodsDate
   </select>    
   
+    <select id="findOrderDetailList" parameterType="java.lang.String" resultType="Map">
+	    select c.productName, a.department, e.username, c.productIcon, substring(c.goodsDate,6) as goodsDate
+	    from orderDetail a
+	    cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
+	    cross join goodsList c on a.productId=c.productId and c.productStatus='1'
+	    cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
+        cross join userinfo e on d.openid=e.openid
+	    where 1=1
+      	<if test="arg0 != null and arg0 != '' and arg0 != 'ALL' ">
+        	and a.department = #{arg0,jdbcType=CHAR}
+      	</if>
+	    <if test="arg1 != null and arg1 != '' and arg1 != 'ALL'">
+        	and a.office = #{arg1,jdbcType=CHAR}
+      	</if>
+	    <if test="arg2 != null and arg2 != '' and arg2 != 'ALL'">
+        	and substring(c.goodsDate,6) = #{arg2,jdbcType=CHAR}
+      	</if>
+        order by c.goodsDate, c.productId, a.department, e.username
+  </select>
+  
 </mapper>

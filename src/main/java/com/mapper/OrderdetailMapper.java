@@ -19,4 +19,6 @@ public interface OrderdetailMapper {
     public List<Orderdetail> findOrderDepartment();
     
     public List<Orderdetail> findOrderOffice();
+    
+    public List<Orderdetail> findOrderDetailList(String department, String office, String goodsDate);
 }

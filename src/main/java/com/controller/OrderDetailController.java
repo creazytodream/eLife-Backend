@@ -64,6 +64,15 @@ public class OrderDetailController {
     		
 		return orderdetailService.findOrderOffice();
     }
+	
+	@RequestMapping(value = "/findOrderDetailList", method = RequestMethod.POST)
+
+	@ResponseBody
+    public List<Orderdetail> findOrderDetailList(@RequestParam(value = "department") String department, String office, String goodsDate) {
+		bizLogger.info("findOrderDetailList department ["+department+"] office ["+office+"] goodsDate ["+goodsDate+"]");
+    		
+		return orderdetailService.findOrderDetailList(department, office, goodsDate);
+    }
 }
 
 

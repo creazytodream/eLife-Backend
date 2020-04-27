@@ -39,4 +39,9 @@ public class OrderdetailServiceImpl implements OrderdetailService {
     public List<Orderdetail> findOrderOffice(){
 		return orderdetailMapper.findOrderOffice();
 	}
+	
+	@Override
+	public List<Orderdetail> findOrderDetailList(String department, String office, String goodsDate) {
+		return orderdetailMapper.findOrderDetailList(department, office, goodsDate);
+	}
 }
