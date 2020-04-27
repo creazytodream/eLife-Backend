@@ -79,9 +79,9 @@
 	from (
 	    select a.quantity, a.productId, substring(c.goodsDate,6) as goodsDate, c.productName, c.productIcon
 	    from orderDetail a
-	    left join storeList b on a.storeId=b.storeId and b.storeStatus='1'
-	    left join goodsList c on a.productId=c.productId and c.productStatus='1'
-	    left join orderList d on a.orderId=d.orderId and d.orderStatus='1'
+	    cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
+	    cross join goodsList c on a.productId=c.productId and c.productStatus='1'
+	    cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
 	    where 1=1
       	<if test="arg0 != null and arg0 != '' and arg0 != 'ALL' ">
         	and a.department = #{arg0,jdbcType=CHAR}
