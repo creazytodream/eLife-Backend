@@ -106,9 +106,8 @@
   
    <select id="findOrderOffice" parameterType="java.lang.String" resultType="Map">
     select distinct substring(c.goodsDate,6) as goodsDate
-    from orderDetail a
-    left join goodsList c on a.productId=c.productId and c.productStatus='1'
-    left join orderList d on a.orderId=d.orderId and d.orderStatus='1'
+    from goodsLList c
+    where c.productStatus='1'
     order by c.goodsDate
   </select>    
   
