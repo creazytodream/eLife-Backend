@@ -7,7 +7,7 @@ package com.entity;
 public class UserInfo {
 	private int id;
 	private String openid;
-	private String username;
+	private String name;
 	private int mobile;
 	private String department;
 	private String office;
@@ -26,12 +26,6 @@ public class UserInfo {
 	}
 	public void setOpenid(String openid) {
 		this.openid = openid;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getDepartment() {
@@ -69,5 +63,11 @@ public class UserInfo {
 	}
 	public void setMobile(int mobile) {
 		this.mobile = mobile;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }
