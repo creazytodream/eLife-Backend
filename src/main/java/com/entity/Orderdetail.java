@@ -8,12 +8,6 @@ public class Orderdetail {
     private String productid;
 
     private String quantity;
-    
-    private String office;
-    
-    private String department;
-    
-    private String section;
 
     public String getOrderid() {
         return orderid;
@@ -46,28 +40,4 @@ public class Orderdetail {
     public void setQuantity(String quantity) {
         this.quantity = quantity == null ? null : quantity.trim();
     }
-
-	public String getOffice() {
-		return office;
-	}
-
-	public void setOffice(String office) {
-		this.office = office;
-	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-
-	public String getSection() {
-		return section;
-	}
-
-	public void setSection(String section) {
-		this.section = section;
-	}
 }

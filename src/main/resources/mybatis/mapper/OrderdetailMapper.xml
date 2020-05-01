@@ -6,17 +6,14 @@
     <result column="storeId" jdbcType="VARCHAR" property="storeid" />
     <result column="productId" jdbcType="VARCHAR" property="productid" />
     <result column="quantity" jdbcType="VARCHAR" property="quantity" />
-    <result column="department" jdbcType="VARCHAR" property="department" />
-    <result column="office" jdbcType="VARCHAR" property="office" />
-    <result column="section" jdbcType="VARCHAR" property="section" />
   </resultMap>
   <insert id="insert" parameterType="com.entity.Orderdetail">
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into orderDetail (orderId, storeId, productId, quantity, department, office, section
+    insert into orderDetail (orderId, storeId, productId, quantity
       )
-    values (#{orderid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}
+    values (#{orderid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.entity.Orderdetail">
@@ -37,15 +34,6 @@
       <if test="quantity != null">
         quantity,
       </if>
-      <if test="department != null">
-        department,
-      </if>
-      <if test="office != null">
-        office,
-      </if>
-      <if test="section != null">
-        section,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
@@ -60,23 +48,15 @@
       <if test="quantity != null">
         #{quantity,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        #{department,jdbcType=VARCHAR},
-      </if>
-      <if test="office != null">
-        #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="section != null">
-        #{section,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
   
   <select id="findOrderdetail" parameterType="java.lang.String" resultType="Map">
-	select a.quantity, a.office, b.storeName, substring(c.goodsDate,6) as goodsDate, c.productName, c.productIcon, c.productPrice
+	select a.quantity, d.office, b.storeName, substring(c.goodsDate,6) as goodsDate, c.productName, c.productIcon, c.productPrice
     from orderDetail a
-    left join storeList b on a.storeId=b.storeId and b.storeStatus='1'
-    left join goodsList c on a.productId=c.productId and c.productStatus='1'
+    cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
+    cross join goodsList c on a.productId=c.productId and c.productStatus='1'
+    cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
     where a.orderid = #{orderid,jdbcType=CHAR}
     order by a.storeId, c.goodsDate, a.productId
   </select>
@@ -91,10 +71,10 @@
 	    cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
 	    where 1=1
       	<if test="arg0 != null and arg0 != '' and arg0 != 'ALL' ">
-        	and a.department = #{arg0,jdbcType=CHAR}
+        	and d.department = #{arg0,jdbcType=CHAR}
       	</if>
 	    <if test="arg1 != null and arg1 != '' and arg1 != 'ALL'">
-        	and a.office = #{arg1,jdbcType=CHAR}
+        	and d.office = #{arg1,jdbcType=CHAR}
       	</if>
 	    <if test="arg2 != null and arg2 != '' and arg2 != 'ALL'">
         	and substring(c.goodsDate,6) = #{arg2,jdbcType=CHAR}
@@ -105,21 +85,21 @@
   </select>
   
   <select id="findOrderDepartment" parameterType="java.lang.String" resultType="Map">
-    select distinct a.department
-    from orderDetail a
-    left join orderList d on a.orderId=d.orderId and d.orderStatus='1'
-    order by a.department
+    select distinct department
+    from orderList
+    where orderStatus='1'
+    order by department
   </select>
   
    <select id="findOrderOffice" parameterType="java.lang.String" resultType="Map">
-    select distinct substring(c.goodsDate,6) as goodsDate
-    from goodsList c
-    where c.productStatus='1'
-    order by c.goodsDate
+    select distinct substring(goodsDate,6) as goodsDate
+    from goodsList
+    where productStatus='1'
+    order by goodsDate
   </select>    
   
     <select id="findOrderDetailList" parameterType="java.lang.String" resultType="Map">
-	    select c.productName, a.department, e.username, c.productIcon, substring(c.goodsDate,6) as goodsDate, a.section
+	    select c.productName, d.department, e.username, c.productIcon, substring(c.goodsDate,6) as goodsDate, d.section
 	    from orderDetail a
 	    cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
 	    cross join goodsList c on a.productId=c.productId and c.productStatus='1'
@@ -127,15 +107,15 @@
         cross join userinfo e on d.openid=e.openid
 	    where 1=1
       	<if test="arg0 != null and arg0 != '' and arg0 != 'ALL' ">
-        	and a.department = #{arg0,jdbcType=CHAR}
+        	and d.department = #{arg0,jdbcType=CHAR}
       	</if>
 	    <if test="arg1 != null and arg1 != '' and arg1 != 'ALL'">
-        	and a.office = #{arg1,jdbcType=CHAR}
+        	and d.office = #{arg1,jdbcType=CHAR}
       	</if>
 	    <if test="arg2 != null and arg2 != '' and arg2 != 'ALL'">
         	and substring(c.goodsDate,6) = #{arg2,jdbcType=CHAR}
       	</if>
-        order by c.goodsDate, c.productId, a.department, e.username
+        order by c.goodsDate, c.productId, d.department, e.username
   </select>
   
 </mapper>

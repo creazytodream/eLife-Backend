@@ -9,9 +9,12 @@
     <result column="orderQuantity" jdbcType="VARCHAR" property="orderquantity" />
     <result column="orderAmount" jdbcType="VARCHAR" property="orderamount" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="office" jdbcType="VARCHAR" property="office" />
+    <result column="section" jdbcType="VARCHAR" property="section" />
   </resultMap>
   <sql id="Base_Column_List">
-    orderId, openid, orderDate, orderStatus, orderQuantity, orderAmount, remarks
+    orderId, openid, orderDate, orderStatus, orderQuantity, orderAmount, remarks, department, office, section
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -28,9 +31,10 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into orderList (orderId, openid, orderDate, orderStatus, 
-      orderQuantity, orderAmount, remarks)
+      orderQuantity, orderAmount, remarks, department, office, section)
     values (#{orderid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, CURRENT_TIMESTAMP(), #{orderstatus,jdbcType=VARCHAR}, 
-      #{orderquantity,jdbcType=VARCHAR}, #{orderamount,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+      #{orderquantity,jdbcType=VARCHAR}, #{orderamount,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
+      #{department,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.entity.Orderlist">
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
@@ -56,6 +60,15 @@
       <if test="reamrks != null">
         remarks,
       </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="office != null">
+        office,
+      </if>
+      <if test="section != null">
+        section,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="openid != null">
@@ -75,6 +88,15 @@
       </if>
       <if test="orderamount != null">
         #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null">
+        #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -96,8 +118,17 @@
       <if test="orderamount != null">
         orderAmount = #{orderamount,jdbcType=VARCHAR},
       </if>
-      <if test="orderamount != null">
+      <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null">
+        office = #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        section = #{section,jdbcType=VARCHAR},
       </if>
     </set>
     where orderId = #{orderid,jdbcType=VARCHAR}
@@ -109,12 +140,15 @@
       orderStatus = #{orderstatus,jdbcType=VARCHAR},
       orderQuantity = #{orderquantity,jdbcType=VARCHAR},
       orderAmount = #{orderamount,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=VARCHAR}
+      remarks = #{remarks,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      office = #{office,jdbcType=VARCHAR},
+      section = #{section,jdbcType=VARCHAR}
     where orderId = #{orderid,jdbcType=VARCHAR}
   </update>
   
   <select id="findOrderlist" parameterType="java.lang.String" resultType="com.entity.Orderlist">
-	select orderid, DATE_FORMAT(orderdate,"%Y-%m-%d %T") as orderDate, orderQuantity, orderAmount, remarks
+	select orderid, DATE_FORMAT(orderdate,"%Y-%m-%d %T") as orderDate, orderQuantity, orderAmount, remarks, department, office, section
     from orderList
     where openid = #{arg0,jdbcType=CHAR}
     and orderstatus = #{arg1,jdbcType=CHAR}
