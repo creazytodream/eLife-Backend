@@ -15,4 +15,8 @@ public class DingDingApiURLConstant {
      *获取用户姓名的接口url
      */
     public static final String URL_USER_GET = "https://oapi.dingtalk.com/user/get";
+    
+    public static final String URL_DEPARTMENT_LIST = "https://oapi.dingtalk.com/department/list";
+    
+    public static final String URL_DEPARTMENT_GET = "https://oapi.dingtalk.com/department/get";
 }
