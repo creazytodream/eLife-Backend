@@ -14,6 +14,7 @@ public class UserInfo {
 	private int floor;
 	private String deptAdmin;
 	private String companyAdmin;
+	private String section;
 	
 	public int getId() {
 		return id;
@@ -69,5 +70,11 @@ public class UserInfo {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getSection() {
+		return section;
+	}
+	public void setSection(String section) {
+		this.section = section;
 	}
 }

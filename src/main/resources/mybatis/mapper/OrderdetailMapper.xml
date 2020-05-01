@@ -52,11 +52,12 @@
   </insert>
   
   <select id="findOrderdetail" parameterType="java.lang.String" resultType="Map">
-	select a.quantity, d.office, b.storeName, substring(c.goodsDate,6) as goodsDate, c.productName, c.productIcon, c.productPrice
+	select a.quantity, e.office, b.storeName, substring(c.goodsDate,6) as goodsDate, c.productName, c.productIcon, c.productPrice
     from orderDetail a
     cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
     cross join goodsList c on a.productId=c.productId and c.productStatus='1'
     cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
+    cross join userinfo e on d.openid=e.openid
     where a.orderid = #{orderid,jdbcType=CHAR}
     order by a.storeId, c.goodsDate, a.productId
   </select>
@@ -69,12 +70,13 @@
 	    cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
 	    cross join goodsList c on a.productId=c.productId and c.productStatus='1'
 	    cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
+	    cross join userinfo e on d.openid=e.openid
 	    where 1=1
       	<if test="arg0 != null and arg0 != '' and arg0 != 'ALL' ">
-        	and d.department = #{arg0,jdbcType=CHAR}
+        	and e.department = #{arg0,jdbcType=CHAR}
       	</if>
 	    <if test="arg1 != null and arg1 != '' and arg1 != 'ALL'">
-        	and d.office = #{arg1,jdbcType=CHAR}
+        	and e.office = #{arg1,jdbcType=CHAR}
       	</if>
 	    <if test="arg2 != null and arg2 != '' and arg2 != 'ALL'">
         	and substring(c.goodsDate,6) = #{arg2,jdbcType=CHAR}
@@ -86,8 +88,7 @@
   
   <select id="findOrderDepartment" parameterType="java.lang.String" resultType="Map">
     select distinct department
-    from orderList
-    where orderStatus='1'
+    from userinfo
     order by department
   </select>
   
@@ -99,7 +100,7 @@
   </select>    
   
     <select id="findOrderDetailList" parameterType="java.lang.String" resultType="Map">
-	    select c.productName, d.department, e.username, c.productIcon, substring(c.goodsDate,6) as goodsDate, d.section
+	    select c.productName, e.department, e.name, c.productIcon, substring(c.goodsDate,6) as goodsDate, e.section
 	    from orderDetail a
 	    cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
 	    cross join goodsList c on a.productId=c.productId and c.productStatus='1'
@@ -107,15 +108,15 @@
         cross join userinfo e on d.openid=e.openid
 	    where 1=1
       	<if test="arg0 != null and arg0 != '' and arg0 != 'ALL' ">
-        	and d.department = #{arg0,jdbcType=CHAR}
+        	and e.department = #{arg0,jdbcType=CHAR}
       	</if>
 	    <if test="arg1 != null and arg1 != '' and arg1 != 'ALL'">
-        	and d.office = #{arg1,jdbcType=CHAR}
+        	and e.office = #{arg1,jdbcType=CHAR}
       	</if>
 	    <if test="arg2 != null and arg2 != '' and arg2 != 'ALL'">
         	and substring(c.goodsDate,6) = #{arg2,jdbcType=CHAR}
       	</if>
-        order by c.goodsDate, c.productId, d.department, e.username
+        order by c.goodsDate, c.productId, e.department, e.name
   </select>
   
 </mapper>
