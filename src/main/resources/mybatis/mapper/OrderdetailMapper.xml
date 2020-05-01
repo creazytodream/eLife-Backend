@@ -8,14 +8,15 @@
     <result column="quantity" jdbcType="VARCHAR" property="quantity" />
     <result column="department" jdbcType="VARCHAR" property="department" />
     <result column="office" jdbcType="VARCHAR" property="office" />
+    <result column="section" jdbcType="VARCHAR" property="section" />
   </resultMap>
   <insert id="insert" parameterType="com.entity.Orderdetail">
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into orderDetail (orderId, storeId, productId, quantity, department, office
+    insert into orderDetail (orderId, storeId, productId, quantity, department, office, section
       )
-    values (#{orderid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}
+    values (#{orderid,jdbcType=VARCHAR}, #{storeid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}, #{section,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.entity.Orderdetail">
@@ -42,6 +43,9 @@
       <if test="office != null">
         office,
       </if>
+      <if test="section != null">
+        section,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
@@ -61,6 +65,9 @@
       </if>
       <if test="office != null">
         #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -112,7 +119,7 @@
   </select>    
   
     <select id="findOrderDetailList" parameterType="java.lang.String" resultType="Map">
-	    select c.productName, a.department, e.username, c.productIcon, substring(c.goodsDate,6) as goodsDate
+	    select c.productName, a.department, e.username, c.productIcon, substring(c.goodsDate,6) as goodsDate, a.section
 	    from orderDetail a
 	    cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
 	    cross join goodsList c on a.productId=c.productId and c.productStatus='1'

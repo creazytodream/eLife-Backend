@@ -8,11 +8,9 @@ public class UserInfo {
 	private int id;
 	private String openid;
 	private String username;
-	private int phone;
-	private String staffid;
+	private int mobile;
 	private String department;
 	private String office;
-	private int office_index;
 	private int floor;
 	private String deptAdmin;
 	private String companyAdmin;
@@ -35,12 +33,6 @@ public class UserInfo {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public int getPhone() {
-		return phone;
-	}
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
 
 	public String getDepartment() {
 		return department;
@@ -54,24 +46,11 @@ public class UserInfo {
 	public void setOffice(String office) {
 		this.office = office;
 	}
-
-	public int getOffice_index() {
-		return office_index;
-	}
-	public void setOffice_index(int office_index) {
-		this.office_index = office_index;
-	}
 	public int getFloor() {
 		return floor;
 	}
 	public void setFloor(int floor) {
 		this.floor = floor;
-	}
-	public String getStaffid() {
-		return staffid;
-	}
-	public void setStaffid(String staffid) {
-		this.staffid = staffid;
 	}
 	public String getDeptAdmin() {
 		return deptAdmin;
@@ -84,5 +63,11 @@ public class UserInfo {
 	}
 	public void setCompanyAdmin(String companyAdmin) {
 		this.companyAdmin = companyAdmin;
+	}
+	public int getMobile() {
+		return mobile;
+	}
+	public void setMobile(int mobile) {
+		this.mobile = mobile;
 	}
 }

@@ -75,7 +75,7 @@ public class DDLoginController {
         resultMap.put("openid", userInfo.getOpenId());
         resultMap.put("name", userInfo.getName());
         resultMap.put("mobile", userInfo.getMobile());
-        resultMap.put("jobnumber", userInfo.getJobnumber());
+        resultMap.put("staffid", userInfo.getJobnumber());
         resultMap.put("section", subDepartment.getName());
         ServiceResult serviceResult = ServiceResult.success(resultMap);
         

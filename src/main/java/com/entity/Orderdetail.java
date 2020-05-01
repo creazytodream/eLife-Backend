@@ -12,6 +12,8 @@ public class Orderdetail {
     private String office;
     
     private String department;
+    
+    private String section;
 
     public String getOrderid() {
         return orderid;
@@ -59,5 +61,13 @@ public class Orderdetail {
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	public String getSection() {
+		return section;
+	}
+
+	public void setSection(String section) {
+		this.section = section;
 	}
 }
