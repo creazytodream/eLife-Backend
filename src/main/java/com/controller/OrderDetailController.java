@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSON;
 import com.entity.Orderdetail;
-import com.entity.Orderlist;
 import com.service.OrderdetailService;
 
 @RestController
@@ -41,7 +40,7 @@ public class OrderDetailController {
 	@RequestMapping(value = "/findOrderdetailByDepartment", method = RequestMethod.POST)
 
 	@ResponseBody
-    public List<Orderdetail> findOrderdetailByDepartment(@RequestParam(value = "department") String department, String office, String goodsDate) {
+    public List<Map> findOrderdetailByDepartment(@RequestParam(value = "department") String department, String office, String goodsDate) {
 		bizLogger.info("findOrderdetailByDepartment department ["+department+"] office ["+office+"] goodsDate ["+goodsDate+"]");
     		
 		return orderdetailService.findOrderdetailByDepartment(department, office, goodsDate);
@@ -50,7 +49,7 @@ public class OrderDetailController {
 	@RequestMapping(value = "/findOrderDepartment", method = RequestMethod.POST)
 
 	@ResponseBody
-    public List<Orderdetail> findOrderDepartment() {
+    public List<Map> findOrderDepartment() {
 		bizLogger.info("findOrderDepartment");
     		
 		return orderdetailService.findOrderDepartment();
@@ -59,7 +58,7 @@ public class OrderDetailController {
 	@RequestMapping(value = "/findOrderOffice", method = RequestMethod.POST)
 
 	@ResponseBody
-    public List<Orderdetail> findOrderOffice() {
+    public List<Map> findOrderOffice() {
 		bizLogger.info("findOrderOffice");
     		
 		return orderdetailService.findOrderOffice();
@@ -68,7 +67,7 @@ public class OrderDetailController {
 	@RequestMapping(value = "/findOrderDetailList", method = RequestMethod.POST)
 
 	@ResponseBody
-    public List<Orderdetail> findOrderDetailList(@RequestParam(value = "department") String department, String office, String goodsDate) {
+    public List<Map> findOrderDetailList(@RequestParam(value = "department") String department, String office, String goodsDate) {
 		bizLogger.info("findOrderDetailList department ["+department+"] office ["+office+"] goodsDate ["+goodsDate+"]");
     		
 		return orderdetailService.findOrderDetailList(department, office, goodsDate);

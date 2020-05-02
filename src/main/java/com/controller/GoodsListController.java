@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entity.Goodslist;
-import com.entity.Storelist;
 import com.service.GoodslistService;
-import com.service.StorelistService;
 
 @RestController
 public class GoodsListController {

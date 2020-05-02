@@ -1,6 +1,7 @@
 package com.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,22 +27,22 @@ public class OrderdetailServiceImpl implements OrderdetailService {
 	}
 	
 	@Override
-	public List<Orderdetail> findOrderdetailByDepartment(String department, String office, String goodsDate) {
+	public List<Map> findOrderdetailByDepartment(String department, String office, String goodsDate) {
 		return orderdetailMapper.findOrderdetailByDepartment(department, office, goodsDate);
 	}
 	
 	@Override
-    public List<Orderdetail> findOrderDepartment() {
+    public List<Map> findOrderDepartment() {
 		return orderdetailMapper.findOrderDepartment();
 	}
     
 	@Override
-    public List<Orderdetail> findOrderOffice(){
+    public List<Map> findOrderOffice(){
 		return orderdetailMapper.findOrderOffice();
 	}
 	
 	@Override
-	public List<Orderdetail> findOrderDetailList(String department, String office, String goodsDate) {
+	public List<Map> findOrderDetailList(String department, String office, String goodsDate) {
 		return orderdetailMapper.findOrderDetailList(department, office, goodsDate);
 	}
 }

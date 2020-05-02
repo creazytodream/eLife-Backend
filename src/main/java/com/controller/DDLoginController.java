@@ -66,17 +66,21 @@ public class DDLoginController {
         OapiUserGetResponse userInfo = getUserInfo(accessToken, userId);
         
         //OapiDepartmentListResponse department = getDepartment(accessToken, userInfo.getDepartment().get(0).toString());
+        String section = "";
+        for (int i=0; i< userInfo.getDepartment().size(); i++) {
+        	OapiDepartmentGetResponse subDepartment = getSubDepartment(accessToken, userInfo.getDepartment().get(i).toString());
+        	
+        	section = subDepartment.getName() + ",";
+        }
+        section = section.substring(0,section.length()-1);
         
-        OapiDepartmentGetResponse subDepartment = getSubDepartment(accessToken, userInfo.getDepartment().get(0).toString());
-        
-        //System.out.println(JSON.toJSONString(userInfo.getBody()));
         //返回结果
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("openid", userInfo.getOpenId());
         resultMap.put("name", userInfo.getName());
         resultMap.put("mobile", userInfo.getMobile());
-        resultMap.put("staffid", userInfo.getJobnumber());
-        resultMap.put("section", subDepartment.getName());
+        //resultMap.put("staffid", userInfo.getJobnumber());
+        resultMap.put("section", section);
         ServiceResult serviceResult = ServiceResult.success(resultMap);
         
         for(Map.Entry<String, Object> entry : resultMap.entrySet()){
@@ -116,7 +120,7 @@ public class DDLoginController {
         try {
         	DingTalkClient client = new DefaultDingTalkClient(DingDingApiURLConstant.URL_DEPARTMENT_LIST);
         	OapiDepartmentListRequest request = new OapiDepartmentListRequest();
-        	request.setId("155991348");
+        	request.setId(departmentId);
         	request.setHttpMethod("GET");
         	OapiDepartmentListResponse response = client.execute(request, accessToken);
         	System.out.println(JSON.toJSONString(response.getBody()));
@@ -124,7 +128,7 @@ public class DDLoginController {
         } catch (ApiException e) {
             e.printStackTrace();
             
-            bizLogger.error("ddlogin URL_USER_GET api exception", e);
+            bizLogger.error("ddlogin URL_DEPARTMENT_LIST api exception", e);
             return null;
         }
     }
@@ -143,7 +147,7 @@ public class DDLoginController {
         } catch (ApiException e) {
             e.printStackTrace();
             
-            bizLogger.error("ddlogin URL_USER_GET api exception", e);
+            bizLogger.error("ddlogin URL_DEPARTMENT_GET api exception", e);
             return null;
         }
     }

@@ -5,7 +5,6 @@ package com.entity;
  */
 
 public class UserInfo {
-	private int id;
 	private String openid;
 	private String name;
 	private int mobile;
@@ -16,12 +15,6 @@ public class UserInfo {
 	private String companyAdmin;
 	private String section;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getOpenid() {
 		return openid;
 	}

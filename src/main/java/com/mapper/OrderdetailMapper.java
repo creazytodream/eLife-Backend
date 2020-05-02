@@ -1,6 +1,7 @@
 package com.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,11 +15,11 @@ public interface OrderdetailMapper {
     
     public List<Orderdetail> findOrderdetail(String orderid);
     
-    public List<Orderdetail> findOrderdetailByDepartment(String department, String office, String goodsDate);
+    public List<Map> findOrderdetailByDepartment(String department, String office, String goodsDate);
     
-    public List<Orderdetail> findOrderDepartment();
+    public List<Map> findOrderDepartment();
     
-    public List<Orderdetail> findOrderOffice();
+    public List<Map> findOrderOffice();
     
-    public List<Orderdetail> findOrderDetailList(String department, String office, String goodsDate);
+    public List<Map> findOrderDetailList(String department, String office, String goodsDate);
 }

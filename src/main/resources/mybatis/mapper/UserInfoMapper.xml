@@ -13,8 +13,8 @@
     <!-- update userInfo -->
     <update id="updateUserInfo" parameterType="com.entity.UserInfo">
         UPDATE userinfo 
-        SET openid=#{openid}, name=#{name} , mobile=#{mobile} ,  department=#{department}, office=#{office}, floor=#{floor} , section=#{section}
-        WHERE id=#{id}
+        SET name=#{name} , mobile=#{mobile} ,  department=#{department}, office=#{office}, floor=#{floor} , section=#{section}
+        WHERE openid=#{openid}
     </update>
     
     <!-- find userInfo -->
@@ -27,6 +27,6 @@
     <!-- delete userInfo -->
     <delete id="deleteUserInfo" parameterType="int">
         DELETE FROM userinfo 
-        WHERE id=#{0}
+        WHERE openid=#{0}
     </delete>
 </mapper>
