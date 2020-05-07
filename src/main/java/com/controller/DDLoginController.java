@@ -83,9 +83,9 @@ public class DDLoginController {
         resultMap.put("section", section);
         ServiceResult serviceResult = ServiceResult.success(resultMap);
         
-        for(Map.Entry<String, Object> entry : resultMap.entrySet()){
-            bizLogger.info(entry.getKey()+":"+entry.getValue());
-        }
+        //for(Map.Entry<String, Object> entry : resultMap.entrySet()){
+        //    bizLogger.info(entry.getKey()+":"+entry.getValue());
+        //}
         
         return serviceResult;
     }

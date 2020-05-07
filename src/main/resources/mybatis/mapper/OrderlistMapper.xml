@@ -116,8 +116,8 @@
   <select id="findOrderlist" parameterType="java.lang.String" resultType="com.entity.Orderlist">
 	select orderid, DATE_FORMAT(orderdate,"%Y-%m-%d %T") as orderDate, orderQuantity, orderAmount, remarks
     from orderList
-    where openid = #{arg0,jdbcType=CHAR}
-    and orderstatus = #{arg1,jdbcType=CHAR}
+    where openid = #{openid,jdbcType=CHAR}
+    and orderstatus = #{orderstatus,jdbcType=CHAR}
     order by orderDate desc
   </select>
   

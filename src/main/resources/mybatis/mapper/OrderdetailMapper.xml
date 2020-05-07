@@ -72,14 +72,14 @@
 	    cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
 	    cross join userinfo e on d.openid=e.openid
 	    where 1=1
-      	<if test="arg0 != null and arg0 != '' and arg0 != 'ALL' ">
-        	and e.department = #{arg0,jdbcType=CHAR}
+      	<if test="department != null and department != '' and department != 'ALL' ">
+        	and e.department = #{department,jdbcType=CHAR}
       	</if>
-	    <if test="arg1 != null and arg1 != '' and arg1 != 'ALL'">
-        	and e.office = #{arg1,jdbcType=CHAR}
+	    <if test="office != null and office != '' and office != 'ALL'">
+        	and e.office = #{office,jdbcType=CHAR}
       	</if>
-	    <if test="arg2 != null and arg2 != '' and arg2 != 'ALL'">
-        	and substring(c.goodsDate,6) = #{arg2,jdbcType=CHAR}
+	    <if test="goodsDate != null and goodsDate != '' and goodsDate != 'ALL'">
+        	and substring(c.goodsDate,6) = #{goodsDate,jdbcType=CHAR}
       	</if>
 	) t
 	group by t.goodsDate, t.productId
@@ -107,14 +107,14 @@
 	    cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
         cross join userinfo e on d.openid=e.openid
 	    where 1=1
-      	<if test="arg0 != null and arg0 != '' and arg0 != 'ALL' ">
-        	and e.department = #{arg0,jdbcType=CHAR}
+      	<if test="department != null and department != '' and department != 'ALL' ">
+        	and e.department = #{department,jdbcType=CHAR}
       	</if>
-	    <if test="arg1 != null and arg1 != '' and arg1 != 'ALL'">
-        	and e.office = #{arg1,jdbcType=CHAR}
+	    <if test="office != null and office != '' and office != 'ALL'">
+        	and e.office = #{office,jdbcType=CHAR}
       	</if>
-	    <if test="arg2 != null and arg2 != '' and arg2 != 'ALL'">
-        	and substring(c.goodsDate,6) = #{arg2,jdbcType=CHAR}
+	    <if test="goodsDate != null and goodsDate != '' and goodsDate != 'ALL'">
+        	and substring(c.goodsDate,6) = #{goodsDate,jdbcType=CHAR}
       	</if>
         order by c.goodsDate, c.productId, e.department, e.name
   </select>
