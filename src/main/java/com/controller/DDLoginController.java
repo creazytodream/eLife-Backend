@@ -53,6 +53,11 @@ public class DDLoginController {
         OapiUserGetuserinfoResponse response;
         try {
             response = client.execute(request, accessToken);
+            
+            bizLogger.info("ddlogin response = "+JSON.toJSONString(response.getBody()));
+            if (response.getErrcode() != 0) {
+            	return null;
+            }
         } catch (ApiException e) {
             e.printStackTrace();
             
