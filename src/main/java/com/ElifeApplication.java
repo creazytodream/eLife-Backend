@@ -13,16 +13,16 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @EnableAsync
 @EnableEurekaClient
-public class Application extends SpringBootServletInitializer {
+public class ElifeApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		//application.listeners(new JdbcPropertiesLoader());
-		return application.sources(Application.class);
+		return application.sources(ElifeApplication.class);
 	}
 
 	public static void main(String[] args) {
-		final SpringApplication application = new SpringApplication(Application.class);
+		final SpringApplication application = new SpringApplication(ElifeApplication.class);
 		//application.addListeners(new JdbcPropertiesLoader());
 		application.run(args);
 	}

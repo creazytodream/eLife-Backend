@@ -116,7 +116,7 @@
 	    <if test="goodsDate != null and goodsDate != '' and goodsDate != 'ALL'">
         	and substring(c.goodsDate,6) = #{goodsDate,jdbcType=CHAR}
       	</if>
-        order by c.goodsDate, c.productId, e.department, e.name
+        order by c.goodsDate, e.name, c.productId, e.department
   </select>
   
 </mapper>
