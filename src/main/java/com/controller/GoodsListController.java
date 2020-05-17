@@ -39,6 +39,13 @@ public class GoodsListController {
 		return goodslist;
 	}
 
+	@RequestMapping(value = "/updateGoodslistStatus", method = RequestMethod.POST)
+
+	@ResponseBody
+	public int updateGoodslistStatus() {
+		bizLogger.info("updateGoodslistStatus");
+		return goodslistService.updateGoodslistStatus();
+	}
 }
 
 

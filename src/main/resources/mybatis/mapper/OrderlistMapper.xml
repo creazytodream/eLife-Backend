@@ -114,11 +114,17 @@
   </update>
   
   <select id="findOrderlist" parameterType="java.lang.String" resultType="com.entity.Orderlist">
-	select orderid, DATE_FORMAT(orderdate,"%Y-%m-%d %T") as orderDate, orderQuantity, orderAmount, remarks
-    from orderList
-    where openid = #{openid,jdbcType=CHAR}
-    and orderstatus = #{orderstatus,jdbcType=CHAR}
-    order by orderDate desc
+	select orderid, orderdate, sum(quantity) as orderQuantity, sum(price) as orderAmount
+	from (
+		select d.orderid, DATE_FORMAT(d.orderdate,"%Y-%m-%d %T") as orderDate, a.quantity, a.quantity * c.productPrice as price
+		from orderDetail a
+		cross join goodsList c on a.productId=c.productId and c.productStatus='1'
+		cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
+		where d.openid = #{openid,jdbcType=CHAR}
+		and d.orderstatus = #{orderstatus,jdbcType=CHAR}
+	) t
+	group by orderid, orderdate
+	order by orderDate desc 
   </select>
   
   <update id="updateOrderStaus" parameterType="java.lang.String">

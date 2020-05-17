@@ -29,4 +29,9 @@ public class ConfigServiceImpl implements ConfigService{
 	public List<Config> findParaValueByParaName(String paraName) {
 		return configMapper.findParaValueByParaName(paraName);
 	};
+	
+	@Override
+	public int updateOrderDueTime() {
+		return configMapper.updateOrderDueTime();
+	}
 }

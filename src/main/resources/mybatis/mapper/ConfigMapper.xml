@@ -70,5 +70,11 @@
     from config
     where paraname = #{paraName,jdbcType=VARCHAR}
   </select>
+  
+   <update id="updateOrderDueTime" parameterType="java.lang.String">
+    update config
+    set paravalue = CONCAT(DATE(NOW()),' 11:00:00')
+    where paraname = 'orderDDL'
+  </update>
  
 </mapper>

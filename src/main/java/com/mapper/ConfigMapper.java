@@ -13,4 +13,6 @@ public interface ConfigMapper {
     
     public List<Config> findAllConfig();
     public List<Config> findParaValueByParaName(String paraName);
+    
+    public int updateOrderDueTime();
 }

@@ -24,5 +24,10 @@ public class GoodslistServiceImpl implements GoodslistService {
 	public List<Goodslist> findOrderedGoodslistByUserId(String openid){
 		return goodslistMapper.findOrderedGoodslistByUserId(openid);
 	}
+	
+	@Override
+	public int updateGoodslistStatus() {
+		return goodslistMapper.updateGoodslistStatus();
+	}
 
 }

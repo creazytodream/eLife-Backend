@@ -28,6 +28,14 @@ public class ConfigParaController {
 		final List<Config> configlist = configService.findParaValueByParaName(paraName);
 		return configlist;
 	}
+	
+	@RequestMapping(value = "/updateOrderDueTime", method = RequestMethod.POST)
+
+	@ResponseBody
+	public int updateOrderDueTime() {
+		bizLogger.info("updateOrderDueTime");
+		return configService.updateOrderDueTime();
+	}
 
 }
 

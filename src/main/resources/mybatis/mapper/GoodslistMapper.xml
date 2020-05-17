@@ -168,4 +168,10 @@
 	where ol.openid = #{openid,jdbcType=CHAR} and ol.orderStatus = 1
   </select>
   
+   <update id="updateGoodslistStatus" parameterType="java.lang.String">
+	UPDATE goodsList
+	set productStatus='2'
+	WHERE SUBSTRING(goodsDate,1,10) <![CDATA[ < ]]> DATE(now())
+  </update>
+  
 </mapper>

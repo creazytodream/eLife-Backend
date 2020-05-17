@@ -22,4 +22,6 @@ public interface GoodslistMapper {
 	public List<Goodslist> findGoodslistByStoreId(String storeId);
 	
 	public List<Goodslist> findOrderedGoodslistByUserId(String openid);
+	
+	public int updateGoodslistStatus();
 }
