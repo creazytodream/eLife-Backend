@@ -5,10 +5,12 @@ import com.config.DingDingApiURLConstant;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiDepartmentGetRequest;
+import com.dingtalk.api.request.OapiDepartmentListParentDeptsByDeptRequest;
 import com.dingtalk.api.request.OapiDepartmentListRequest;
 import com.dingtalk.api.request.OapiUserGetRequest;
 import com.dingtalk.api.request.OapiUserGetuserinfoRequest;
 import com.dingtalk.api.response.OapiDepartmentGetResponse;
+import com.dingtalk.api.response.OapiDepartmentListParentDeptsByDeptResponse;
 import com.dingtalk.api.response.OapiDepartmentListResponse;
 import com.dingtalk.api.response.OapiUserGetResponse;
 import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
@@ -17,6 +19,7 @@ import com.util.AccessTokenUtil;
 import com.util.ServiceResult;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -38,8 +41,8 @@ public class DDLoginController {
     @RequestMapping(value = "/ddlogin", method = RequestMethod.POST)
     
     @ResponseBody
-    public ServiceResult ddlogin(@RequestParam(value = "authCode") String requestAuthCode) {
-    	bizLogger.info("ddlogin authCode = "+requestAuthCode);
+    public ServiceResult ddlogin(@RequestParam(value = "authCode") String authCode) {
+    	bizLogger.info("ddlogin authCode = "+authCode);
     	
         //获取accessToken,注意正是代码要有异常流处理
         String accessToken = AccessTokenUtil.getToken();
@@ -47,7 +50,7 @@ public class DDLoginController {
         //获取用户信息
         DingTalkClient client = new DefaultDingTalkClient(DingDingApiURLConstant.URL_GET_USER_INFO);
         OapiUserGetuserinfoRequest request = new OapiUserGetuserinfoRequest();
-        request.setCode(requestAuthCode);
+        request.setCode(authCode);
         request.setHttpMethod("GET");
 
         OapiUserGetuserinfoResponse response;
@@ -71,20 +74,47 @@ public class DDLoginController {
         OapiUserGetResponse userInfo = getUserInfo(accessToken, userId);
         
         //OapiDepartmentListResponse department = getDepartment(accessToken, userInfo.getDepartment().get(0).toString());
-        String section = "";
+        
+        boolean hasSection = true;
+        String department = "";
+        String section = "";      
+        
         for (int i=0; i< userInfo.getDepartment().size(); i++) {
-        	OapiDepartmentGetResponse subDepartment = getSubDepartment(accessToken, userInfo.getDepartment().get(i).toString());
+        	OapiDepartmentListParentDeptsByDeptResponse parentDepartment = getParentDepartment(accessToken, userInfo.getDepartment().get(0).toString());
         	
-        	section = subDepartment.getName() + ",";
+        	if (parentDepartment.getParentIds().size() == 2) {
+        		hasSection = false;
+        	}
+        	
+        	String departmentId = parentDepartment.getParentIds().get(parentDepartment.getParentIds().size()-2).toString();
+        	
+        	OapiDepartmentGetResponse subDepartment = getSubDepartment(accessToken, departmentId);
+        	
+        	department = department + "," + subDepartment.getName();
         }
-        section = section.substring(0,section.length()-1);
+        
+        department = department.substring(1,department.length());
+        
+        if(hasSection) {	        
+	        for (int i=0; i< userInfo.getDepartment().size(); i++) {
+	        	OapiDepartmentGetResponse subDepartment = getSubDepartment(accessToken, userInfo.getDepartment().get(i).toString());
+	        	
+	        	section = section + "," + subDepartment.getName();
+	        }
+	        
+	        section = section.substring(1,section.length());
+        } else {
+        	section = department;
+        }
         
         //返回结果
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("openid", userInfo.getOpenId());
         resultMap.put("name", userInfo.getName());
-        resultMap.put("mobile", userInfo.getMobile());
+        //resultMap.put("mobile", userInfo.getMobile());
+        
         //resultMap.put("staffid", userInfo.getJobnumber());
+        resultMap.put("department", department);
         resultMap.put("section", section);
         ServiceResult serviceResult = ServiceResult.success(resultMap);
         
@@ -153,6 +183,24 @@ public class DDLoginController {
             e.printStackTrace();
             
             bizLogger.error("ddlogin URL_DEPARTMENT_GET api exception", e);
+            return null;
+        }
+    }
+    
+    private OapiDepartmentListParentDeptsByDeptResponse getParentDepartment(String accessToken, String departmentId) {
+    	bizLogger.info("getParentDepartment departmentId = "+departmentId);
+        try {
+        	DingTalkClient client = new DefaultDingTalkClient(DingDingApiURLConstant.URL_DEPARTMENT_GET_PARENT);
+        	OapiDepartmentListParentDeptsByDeptRequest request = new OapiDepartmentListParentDeptsByDeptRequest();
+        	request.setId(departmentId);
+        	request.setHttpMethod("GET");
+        	OapiDepartmentListParentDeptsByDeptResponse response = client.execute(request, accessToken);
+        	System.out.println(JSON.toJSONString(response.getBody()));
+            return response;
+        } catch (ApiException e) {
+            e.printStackTrace();
+            
+            bizLogger.error("ddlogin URL_DEPARTMENT_GET_PARENT api exception", e);
             return null;
         }
     }

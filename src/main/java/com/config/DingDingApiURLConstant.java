@@ -19,4 +19,6 @@ public class DingDingApiURLConstant {
     public static final String URL_DEPARTMENT_LIST = "https://oapi.dingtalk.com/department/list";
     
     public static final String URL_DEPARTMENT_GET = "https://oapi.dingtalk.com/department/get";
+    
+    public static final String URL_DEPARTMENT_GET_PARENT = "https://oapi.dingtalk.com/department/list_parent_depts_by_dept";
 }
