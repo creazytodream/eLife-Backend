@@ -111,8 +111,7 @@ public class DDLoginController {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("openid", userInfo.getOpenId());
         resultMap.put("name", userInfo.getName());
-        //resultMap.put("mobile", userInfo.getMobile());
-        
+        //resultMap.put("mobile", userInfo.getMobile());   
         //resultMap.put("staffid", userInfo.getJobnumber());
         resultMap.put("department", department);
         resultMap.put("section", section);

@@ -55,7 +55,7 @@
 	select a.quantity, e.office, b.storeName, substring(c.goodsDate,6) as goodsDate, c.productName, c.productIcon, c.productPrice
     from orderDetail a
     cross join storeList b on a.storeId=b.storeId and b.storeStatus='1'
-    cross join goodsList c on a.productId=c.productId and c.productStatus='1'
+    cross join goodsList c on a.productId=c.productId and c.productStatus=#{productStatus,jdbcType=CHAR}
     cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
     cross join userinfo e on d.openid=e.openid
     where a.orderid = #{orderid,jdbcType=CHAR}

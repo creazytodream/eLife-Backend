@@ -47,12 +47,12 @@ public class OrderListController {
 	@RequestMapping(value = "/findOrderlist", method = RequestMethod.POST)
 
 	@ResponseBody
-    public List<Orderlist> findOrderlist(@RequestParam(value = "openid") String openid, String orderstatus) {
-		bizLogger.info("findOrderlist openid ["+openid+"] orderstatus ["+orderstatus+"]");
+    public List<Orderlist> findOrderlist(@RequestParam(value = "openid") String openid, String productStatus) {
+		bizLogger.info("findOrderlist openid ["+openid+"] productStatus ["+productStatus+"]");
     		
-    	List<Orderlist> orderlist = orderlistService.findOrderlist(openid, orderstatus);
+    	List<Orderlist> orderlist = orderlistService.findOrderlist(openid, productStatus);
     	for(Orderlist order : orderlist){
-    		order.setOrderDetailList(orderdetailService.findOrderdetail(order.getOrderid()));
+    		order.setOrderDetailList(orderdetailService.findOrderdetail(order.getOrderid(), productStatus));
     	}
     	return orderlist;
     }

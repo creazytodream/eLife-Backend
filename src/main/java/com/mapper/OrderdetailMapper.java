@@ -13,7 +13,7 @@ public interface OrderdetailMapper {
 
     int insertSelective(Orderdetail record);
     
-    public List<Orderdetail> findOrderdetail(String orderid);
+    public List<Orderdetail> findOrderdetail(String orderid, String productStatus);
     
     public List<Map> findOrderdetailByDepartment(String department, String office, String goodsDate);
     

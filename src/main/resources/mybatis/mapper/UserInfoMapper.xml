@@ -6,14 +6,14 @@
 
     <!-- insert userInfo -->
     <insert id = "insertUserInfo" parameterType="com.entity.UserInfo">
-        INSERT INTO userinfo (openid, name, mobile, department, office, floor, section) 
-        VALUES (#{openid}, #{name}, #{mobile}, #{department}, #{office}, #{floor}, #{section});
+        INSERT INTO userinfo (openid, name, department, office, floor, section) 
+        VALUES (#{openid}, #{name}, #{department}, #{office}, #{floor}, #{section});
     </insert>
     
     <!-- update userInfo -->
     <update id="updateUserInfo" parameterType="com.entity.UserInfo">
         UPDATE userinfo 
-        SET name=#{name} , mobile=#{mobile} ,  department=#{department}, office=#{office}, floor=#{floor} , section=#{section}
+        SET name=#{name} ,  department=#{department}, office=#{office}, floor=#{floor} , section=#{section}
         WHERE openid=#{openid}
     </update>
     

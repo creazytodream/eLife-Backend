@@ -22,8 +22,8 @@ public class OrderdetailServiceImpl implements OrderdetailService {
 	}
 	
 	@Override
-	public List<Orderdetail> findOrderdetail(String orderid){
-		return orderdetailMapper.findOrderdetail(orderid);
+	public List<Orderdetail> findOrderdetail(String orderid, String productStatus){
+		return orderdetailMapper.findOrderdetail(orderid, productStatus);
 	}
 	
 	@Override

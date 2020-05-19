@@ -8,7 +8,7 @@ import com.entity.Orderdetail;
 public interface OrderdetailService {
 	int insert(Orderdetail record);
 	
-	public List<Orderdetail> findOrderdetail(String orderid);
+	public List<Orderdetail> findOrderdetail(String orderid, String productStatus);
 	
 	public List<Map> findOrderdetailByDepartment(String department, String office, String goodsDate);
 	

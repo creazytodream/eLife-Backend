@@ -6,12 +6,10 @@
     <result column="openid" jdbcType="VARCHAR" property="openid" />
     <result column="orderDate" jdbcType="TIMESTAMP" property="orderdate" />
     <result column="orderStatus" jdbcType="VARCHAR" property="orderstatus" />
-    <result column="orderQuantity" jdbcType="VARCHAR" property="orderquantity" />
-    <result column="orderAmount" jdbcType="VARCHAR" property="orderamount" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Base_Column_List">
-    orderId, openid, orderDate, orderStatus, orderQuantity, orderAmount, remarks
+    orderId, openid, orderDate, orderStatus, remarks
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -27,10 +25,8 @@
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into orderList (orderId, openid, orderDate, orderStatus, 
-      orderQuantity, orderAmount, remarks)
-    values (#{orderid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, CURRENT_TIMESTAMP(), #{orderstatus,jdbcType=VARCHAR}, 
-      #{orderquantity,jdbcType=VARCHAR}, #{orderamount,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+    insert into orderList (orderId, openid, orderDate, orderStatus, remarks)
+    values (#{orderid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, CURRENT_TIMESTAMP(), #{orderstatus,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.entity.Orderlist">
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
@@ -47,12 +43,6 @@
       <if test="orderstatus != null">
         orderStatus,
       </if>
-      <if test="orderquantity != null">
-        orderQuantity,
-      </if>
-      <if test="orderamount != null">
-        orderAmount,
-      </if>
       <if test="reamrks != null">
         remarks,
       </if>
@@ -67,13 +57,7 @@
       <if test="orderstatus != null">
         #{orderstatus,jdbcType=VARCHAR},
       </if>
-      <if test="orderquantity != null">
-        #{orderquantity,jdbcType=VARCHAR},
-      </if>
-      <if test="orderamount != null">
-        #{orderamount,jdbcType=VARCHAR},
-      </if>
-      <if test="orderamount != null">
+      <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
       </if>
     </trim>
@@ -90,12 +74,6 @@
       <if test="orderstatus != null">
         orderStatus = #{orderstatus,jdbcType=VARCHAR},
       </if>
-      <if test="orderquantity != null">
-        orderQuantity = #{orderquantity,jdbcType=VARCHAR},
-      </if>
-      <if test="orderamount != null">
-        orderAmount = #{orderamount,jdbcType=VARCHAR},
-      </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
       </if>
@@ -107,8 +85,6 @@
     set openid = #{openid,jdbcType=VARCHAR},
       orderDate = #{orderdate,jdbcType=TIMESTAMP},
       orderStatus = #{orderstatus,jdbcType=VARCHAR},
-      orderQuantity = #{orderquantity,jdbcType=VARCHAR},
-      orderAmount = #{orderamount,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=VARCHAR}
     where orderId = #{orderid,jdbcType=VARCHAR}
   </update>
@@ -118,10 +94,10 @@
 	from (
 		select d.orderid, DATE_FORMAT(d.orderdate,"%Y-%m-%d %T") as orderDate, a.quantity, a.quantity * c.productPrice as price
 		from orderDetail a
-		cross join goodsList c on a.productId=c.productId and c.productStatus='1'
+		cross join goodsList c on a.productId=c.productId and c.productStatus=#{productStatus,jdbcType=CHAR}
 		cross join orderList d on a.orderId=d.orderId and d.orderStatus='1'
 		where d.openid = #{openid,jdbcType=CHAR}
-		and d.orderstatus = #{orderstatus,jdbcType=CHAR}
+		and d.orderstatus = '1'
 	) t
 	group by orderid, orderdate
 	order by orderDate desc 

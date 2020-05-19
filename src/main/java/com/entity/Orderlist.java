@@ -12,11 +12,11 @@ public class Orderlist {
 
 	private String orderstatus;
 
-	private String orderquantity;
-
-	private String orderamount;
-
 	private String remarks;
+	
+	private String orderQuantity;
+	
+	private String orderAmount;
 	
 	private List<Orderdetail> orderDetailList;
 	
@@ -44,22 +44,6 @@ public class Orderlist {
 		this.orderstatus = orderstatus;
 	}
 
-	public String getOrderquantity() {
-		return orderquantity;
-	}
-
-	public void setOrderquantity(String orderquantity) {
-		this.orderquantity = orderquantity;
-	}
-
-	public String getOrderamount() {
-		return orderamount;
-	}
-
-	public void setOrderamount(String orderamount) {
-		this.orderamount = orderamount;
-	}
-
 	public String getRemarks() {
 		return remarks;
 	}
@@ -82,6 +66,22 @@ public class Orderlist {
 
 	public void setOrderdate(String orderdate) {
 		this.orderdate = orderdate;
+	}
+
+	public String getOrderQuantity() {
+		return orderQuantity;
+	}
+
+	public void setOrderQuantity(String orderQuantity) {
+		this.orderQuantity = orderQuantity;
+	}
+
+	public String getOrderAmount() {
+		return orderAmount;
+	}
+
+	public void setOrderAmount(String orderAmount) {
+		this.orderAmount = orderAmount;
 	}
 
 }
