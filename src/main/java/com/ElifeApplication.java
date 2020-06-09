@@ -6,13 +6,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 启动入口
  */
 @SpringBootApplication
 @EnableAsync
-@EnableEurekaClient
+//@EnableEurekaClient
+@EnableScheduling
 public class ElifeApplication extends SpringBootServletInitializer {
 
 	@Override
