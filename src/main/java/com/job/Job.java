@@ -33,12 +33,12 @@ public class Job {
 //        System.out.println(" >>fixedRate执行....");
 //    }
 
-    @Scheduled(cron="0 0 4 * * 2-6")
+    @Scheduled(cron="0 0 4 * * 1-5")
     public void updateOrderDueTime(){
     	bizLogger.info(" >>updateOrderDueTime执行result="+ configService.updateOrderDueTime());
     }
     
-    @Scheduled(cron="0 1 4 * * 3-6")
+    @Scheduled(cron="0 1 4 * * 2-5")
     public void updateGoodslistStatus(){
     	bizLogger.info(" >>updateGoodslistStatus执行result="+ goodslistService.updateGoodslistStatus());
     }
