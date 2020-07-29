@@ -7,9 +7,11 @@
     <result column="orderDate" jdbcType="TIMESTAMP" property="orderdate" />
     <result column="orderStatus" jdbcType="VARCHAR" property="orderstatus" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="office" jdbcType="VARCHAR" property="office" />
+    <result column="floor" jdbcType="VARCHAR" property="floor" />
   </resultMap>
   <sql id="Base_Column_List">
-    orderId, openid, orderDate, orderStatus, remarks
+    orderId, openid, orderDate, orderStatus, remarks, office, floor
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -25,8 +27,8 @@
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into orderList (orderId, openid, orderDate, orderStatus, remarks)
-    values (#{orderid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, CURRENT_TIMESTAMP(), #{orderstatus,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+    insert into orderList (orderId, openid, orderDate, orderStatus, remarks, office, floor)
+    values (#{orderid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, CURRENT_TIMESTAMP(), #{orderstatus,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.entity.Orderlist">
     <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.String">
@@ -46,6 +48,12 @@
       <if test="reamrks != null">
         remarks,
       </if>
+      <if test="office != null">
+        office,
+      </if>
+      <if test="floor != null">
+        floor,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="openid != null">
@@ -59,6 +67,12 @@
       </if>
       <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null">
+        #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -76,6 +90,12 @@
       </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null">
+        office = #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        floor = #{floor,jdbcType=VARCHAR},
       </if>
     </set>
     where orderId = #{orderid,jdbcType=VARCHAR}

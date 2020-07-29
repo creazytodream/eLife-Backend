@@ -14,9 +14,9 @@ public class Orderlist {
 
 	private String remarks;
 	
-	private String orderQuantity;
+	private String office;
 	
-	private String orderAmount;
+	private String floor;
 	
 	private List<Orderdetail> orderDetailList;
 	
@@ -68,20 +68,20 @@ public class Orderlist {
 		this.orderdate = orderdate;
 	}
 
-	public String getOrderQuantity() {
-		return orderQuantity;
+	public String getOffice() {
+		return office;
 	}
 
-	public void setOrderQuantity(String orderQuantity) {
-		this.orderQuantity = orderQuantity;
+	public void setOffice(String office) {
+		this.office = office;
 	}
 
-	public String getOrderAmount() {
-		return orderAmount;
+	public String getFloor() {
+		return floor;
 	}
 
-	public void setOrderAmount(String orderAmount) {
-		this.orderAmount = orderAmount;
+	public void setFloor(String floor) {
+		this.floor = floor;
 	}
 
 }

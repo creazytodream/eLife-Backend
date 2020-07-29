@@ -33,9 +33,8 @@ public class OrderListController {
 
 	@ResponseBody
     public boolean insertOrderList(Orderlist orderlist) {
-		bizLogger.info("insertOrderList orderId = "+orderlist.getOrderid());
+		bizLogger.info("insertOrderList = "+JSON.toJSONString(orderlist));
     	try{
-    		//System.out.println(JSON.toJSONString(orderlist));
     		orderlistService.insert(orderlist);
     		return true;
     	} catch (Exception e) {
